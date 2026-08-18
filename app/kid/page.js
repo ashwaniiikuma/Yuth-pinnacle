@@ -3,22 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-export default function Home() {
+export default function Kid() {
   
-  // High quality fashion images from Pexels - Inhe real stock photo se replace karein jab ho.
-  const categories = [
-    { name: 'MEN', image: 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/men' },
-    { name: 'WOMEN', image: 'https://images.pexels.com/photos/1183263/pexels-photo-1183263.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/women' },
-    { name: 'KIDS', image: 'https://images.pexels.com/photos/1619801/pexels-photo-1619801.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/kids' },
-    { name: 'BEAUTY', image: 'https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/beauty' },
-  ];
+ 
 
  const slides = [
     {
       id: 1,
       type: 'full', // Full Width Banner
-      image: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      title: 'Gen-Z Fashion For All',
+      image: 'https://media.istockphoto.com/id/506317910/photo/beautiful-little-girl-model-wearing-a-leopard-dress-and-sunglass.jpg?s=612x612&w=0&k=20&c=KrrWf0Leaw9Zvgb3vpMVks-zvbY86VgZRVMjUxzdwsY=',
+      title: 'KIDWEAR',
       subtitle: 'fwd',
       offer: 'UNDER ₹999',
       buttonText: 'SHOP NOW >',
@@ -27,16 +21,16 @@ export default function Home() {
     {
       id: 2,
       type: 'split', // Image + Text Banner
-      image: 'https://images.pexels.com/photos/3735641/pexels-photo-3735641.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'U.S. POLO ASSN.',
+      image: 'https://media.istockphoto.com/id/172439451/photo/cheerful-little-indian-girls-and-a-boy-isolated-on-white.jpg?s=612x612&w=0&k=20&c=aEZY0iXIFssi0TJHk76TEJIfuKuk-4nYTiM81jkt_LU=',
+      brandName: 'TOP BRANDS',
       offer: 'Up To 50% Off',
       link: '/brand/us-polo'
     },
     {
       id: 3,
       type: 'split',
-      image: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'HANDBAGS',
+      image: 'https://media.istockphoto.com/id/1293357713/photo/short-child-boy-in-red-t-shirt-and-tall-child-boy-in-white-t-shirt-standing-arms-crossed-and.jpg?s=612x612&w=0&k=20&c=AYVxOuZI0jXjh1lv8sNsMm5oEYpUGeI1zdC39Cy52GM=',
+      brandName: 'KIDS TSHIRT&SHORTS',
       offer: 'Min. 60% Off',
       brandLogo: 'CAPRESE',
       link: '/category/handbags'
@@ -44,8 +38,8 @@ export default function Home() {
     {
       id: 4,
       type: 'split',
-      image: 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'ACTIVEWEAR',
+      image: 'https://media.istockphoto.com/id/915681134/photo/cute-boy-in-the-underwear.jpg?s=612x612&w=0&k=20&c=R9dGDP7dLtWdUrGZI9Y0T7jOb0pbtfZDj-vsGKrK-tk=',
+      brandName: 'INNERWEAR',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
       link: '/category/activewear'
@@ -188,176 +182,211 @@ export default function Home() {
     ))}
   </div>
 
-</section>
+ </section>
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
-  <div className="relative z-10 text-center max-w-xl mx-auto space-y-1">
+  <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-2xl md:text-3xl tracking-[0.2em] font-extrabold underline bg-clip-text text-[#e0a76d] uppercase">
-      SHOP BY CATEGORY
+    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-800 uppercase">
+      Fession & Essiancial
     </h2>
-    <p className="text-[#c99a66] text-xs md:text-sm font-medium tracking-wide">
-      Handpicked apparel designed for comfort and modern style
-    </p>
+    
   </div>
 
 
   {/* Garment Products Grid */}
-  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-8 gap-4">
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-10 gap-4">
+    {[
+     {
+      id: 1,
+      name: "PROTECTIVE MASK",
+      image:'https://m.media-amazon.com/images/I/61tNVVkzt6L._AC_UF1000,1000_QL80_.jpg',
+      href: '/products/women'
+    },
+    {
+      id: 2,
+      name: "BABY CARE",
+      image: 'https://images-static.nykaa.com/media/catalog/product/5/f/5fec660MAJAB00000226_01.jpg',
+      href: '/products/kid'
+    },
+    {
+      id: 3,
+      name: "SHORTS",
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl9RhgrL_RPRtNxmdoSbA14-PojjuDLBKacjzDDg0gwg&s=10',
+      href: '/products/kid'
+    },
+    {
+      id: 4,
+      name: "VALUE PACKS & SETS",
+      image: 'https://img.tatacliq.com/images/i19//437Wx649H/MP000000023415413_437Wx649H_202408241343211.jpeg',
+      href: '/products/kid'
+    },
+    {
+      id: 5,
+      name: "SLEEPWEAR & INNERWEAR",
+      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB80w9jwi16dPyn1sRMBzicpnUgaXPl3_aR1BYIbs6U2nP0cwKdC_xuR0&s=10',
+      href: '/products/kid',
+    }, 
+    {
+      id: 6,
+      name: "ETHNIC WEAR",
+      image: 'https://mokshaaworld.com/cdn/shop/files/BJK9436-2.jpg?v=1772998687&width=2981',
+      href: '/products/kid',
+    },
+    {
+      id: 7,
+      name: "ONESIES",
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHXB8-Klkbhu54bhH8C6l1p0VxvPc0oQNv0fQXyimXoOJFRhrDCdyfQSM&s=10',
+      href: '/products/kid',
+    },
+    {
+      id: 8,
+      name: "FLIP-FLOP & SANDLS",
+      image: 'https://purpleunited.com/cdn/shop/files/TGSAFW000657-PINK-1.jpg?v=1775304545&width=450',
+      href: '/products/kid',
+    },
+    {
+      id: 9,
+      name: "DRESSES",
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfrBOYwZdbSN89gY9RMgVh_uwAKp-t6xQvICf0j1iet9Jum9Ukq20qf1Y0&s=10',
+      href: '/products/kid',
+    },
+    {
+      id: 10,
+      name: "T-SHIRT & TOPS",
+      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbfHUjhbfpO3BKtpG9KAgwr2zW0tDcGLdPTPLFmGrPqw&s=10',
+      href: '/products/kid',
+    }
+ 
+      
+    ].map((item) => (
+       <Link 
+      key={item.id} 
+      href={item.href}
+      className="group bg-gray-50/50 hover:bg-white rounded-xl p-3 border border-transparent hover:border-gray-200 transition-all duration-300 flex flex-col items-center text-center shadow-none hover:shadow-lg"
+    >
+      <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-100 mb-3">
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      {/* BRAND NAME */}
+      <span className="text-xs font-bold uppercase tracking-wider text-gray-900 mt-1">
+        {item.brand}
+      </span>
+
+      {/* CATEGORY NAME (SUBTITLE) */}
+      <div className="mt-3 flex items-center justify-center gap-1">
+              <span className="text-sm sm:text-base font-extrabold text-[#282c3f] tracking-wider uppercase group-hover:text-blue-600 transition-colors">
+                + {item.name}
+              </span>
+            </div>
+
+    </Link>
+    ))}
+  </div>
+</section>
+    {/* //Explore Top brands */}
+ <section className="max-w-[1500px] mx-auto px-6 py-12">
+  <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
+    {/* Metallic Gold Gradient Text */}
+    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-500 uppercase">
+      Eexplore more
+    </h2>
+    
+  </div>
+
+
+  {/* Garment Products Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 py-10 gap-4">
     {[
      
-  {
+ {
     id: 1,
-    name: "Casual Wear",
-    offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    
+    name: "Caps",
+  image:'https://giftingshop.in/wp-content/uploads/Images/KidsTshirt/baby-tshirt-cotton-material.jpg',
+    href: '/products/kid'
   },
   {
     id: 2,
+   
     name: "Ethnic Wear",
-    offer: "50-80% OFF",
-    image: 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    image: 'https://essa.in/cdn/shop/files/b-3846_boys_down_shoulder_t_shirt_dusty_pink.jpg?v=1758349055',
+    href: '/products/kid'
   },
   {
     id: 3,
     name: "Winter Wear",
-    offer: "30-70% OFF",
-    image: 'https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/men'
+    image:'https://fastcolors.in/cdn/shop/files/FastColors-Full_Sleeve-printed-kids_t_shirt_-_FastColors-4952393.jpg?v=1729849905&width=975',
+    href: '/products/kid'
   },
   {
     id: 4,
     name: "Western Wear",
-    offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    image:'https://img01.ztat.net/article/spp-media-p1/4e73e81be19f4d9ab47e3a9e681ef70f/902d35e073bd447fbad77603d3169f98.jpg?imwidth=300',
+    href: '/products/kid'
   },
-  {
+    {
     id: 5,
-    name: "Full Sleeve Tees",
-    offer: "40-60% OFF",
-    image: 'https://ttbazaar.com/cdn/shop/files/34_452f652d-56a8-4426-b976-f5ce432e1c6f.jpg?v=1760328571',
-    href: '/products/men',
-  }, 
-  {
+    name: "Western Wear",
+      image:'https://i.etsystatic.com/60086255/r/il/ef2830/6955541500/il_570xN.6955541500_t9t3.jpg',
+    href: '/products/kid'
+  },
+    {
     id: 6,
-    name: "Layered Shirts",
-    offer: "30-60% OFF",
-    image: 'https://www.twills.in/cdn/shop/files/E-20848-9393_2_2048x.jpg?v=1747652670',
-    href: '/products/men',
+    name: "Western Wear",
+    image:'https://img.tatacliq.com/images/i30//437Wx649H/MP000000030368343_437Wx649H_202603071121131.jpeg',
+    href: '/products/kid'
   },
-  {
+   {
     id: 7,
-    name: "Sportswear",
-    offer: "30-80% OFF",
-    image: 'https://izzyapparel.com/wp-content/uploads/2024/01/Website-1-mob-min.jpg',
-    href: '/products/men',
+    name: "Western Wear",
+    image:'https://manyavar.scene7.com/is/image/manyavar/CHOSK719-311+(4)_07-05-2025-13-01:283x395?dpr=on,2.625',
+    href: '/products/kid'
   },
-  {
+   {
     id: 8,
-    name: "High Neck Tops",
-    offer: "UP TO 50% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTko5-kThqKd2e9ION8jd8vPByyqhM6_JcdUeZhlftR5XCNNvMp_hSAmFYe&s=10',
-    href: '/products/men',
-  },
-  {
-    id: 9,
-    name: "Innerwear",
-    offer: "UP TO 70% OFF",
-    image: 'https://img.tatacliq.com/images/i30/437Wx649H/MP000000030018468_437Wx649H_202602081818291.jpeg',
-    href: '/products/men',
-  },
-  {
-    id: 10,
-    name: "Polo Wear",
-    offer: "40-70% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIqqHGjjC0IuGjQ0IiknCfGl_2Il_SOb3Hmp0ckqLn2A&s=10',
-    href: '/products/men',
-  },
-  {
-    id: 11,
-    name: "Kids Wear",
-    offer: "30-70% OFF",
-    image: 'https://t4.ftcdn.net/jpg/03/51/36/87/360_F_351368733_Fa4b4G0LmmR4jQmlcChzgVmnuGm0SLFY.jpg',
-    href: '/products/kid',
-  },
-  {
-    id: 12,
-    name: "Inclusive Style",
-    offer: "40-80% OFF",
-    image: 'https://www.stitchfix.com/men/blog/wp-content/uploads/2021/08/21-03-30_M_OF_V15_0069_2x3-683x1024.jpeg',
-    href: '/products/men',
-  },
-  {
-    id: 13,
-    name: "Work Wear",
-    offer: "30-70% OFF",
-    image: 'https://www.marksandspencer.in/on/demandware.static/-/Sites-mnsindia-Library/en_IN/dw58144f8c/mns-india-homepage/2022/easy-office-outfit-ideas-for-him-and-herImage1.jpg',
-    href: '/products/men',
-  },
-  {
-    id: 14,
-    name: "Sleepwear",
-    offer: "40-60% OFF",
-    image: 'https://cdn.shopify.com/s/files/1/0266/6276/4597/files/301079023ELDERBERRY_1_800x.jpg?v=1785924014&width=700&height=933&crop=center',
-    href: '/products/women',
-  },
-  {
-    id: 15,
-    name: "Beauty & Makeup",
-    offer: "UP TO 60% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGC7Dt5sRFn39MfypHGGlgSJ0VXdpUDdRi8bMgRCnu-A&s=10',
-    href: '/products/beauty'
-  },
-  {
-    id:16,
-    name: "Size-inclusive Styles",
-    offer:"UP to 30%-50%",
-    image:'https://www.lindseybrown.com/cdn/shop/files/AquasilktiedyesilkkaftantowearonholidaybyLindseyBrownluxuryresortwear_c479d089-6443-499c-82a6-a171bfca6fd9.jpg?v=1758041571&width=2048',
-    href:'/products/women',
+    name: "Western Wear",
+    image:'https://5.imimg.com/data5/GLADMIN/Default/2021/8/GF/BA/KC/76258/kids-formal-wear-250x250.jpg',
+    href: '/products/kid'
   }
 
-      
+  
+ 
       
     ].map((item) => (
-      <Link 
-  key={item.id} 
-  href={item.href} 
-  className="group bg-[#fff8f5] border-4 border-[#fbdbca] hover:border-[#e0a96d] rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[220px] mx-auto w-full text-center"
->
-  {/* Image Box - Clean Fit without cutting */}
-  <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 p-1">
-    <img 
-      src={item.image} 
-      alt={item.name} 
-      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-    />
-  </div>
+     <Link 
+      key={item.id} 
+      href={item.href}
+      className="group bg-gray-50/50 hover:bg-white rounded-xl p-3 border border-transparent hover:border-gray-200 transition-all duration-300 flex flex-col items-center text-center shadow-none hover:shadow-lg"
+    >
+      <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-100 mb-3">
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
 
-  {/* Product Details - Myntra Minimalist Offer Style */}
-  <div className="p-2.5 bg-[#fff8f5] flex flex-col items-center justify-center space-y-0.5 border-t border-[#fce8de]">
-    {/* Title / Category Name */}
-    <h3 className="text-xs font-semibold text-gray-800 line-clamp-1">
-      {item.name}
-    </h3>
+      {/* BRAND NAME */}
+      
+      {/* CATEGORY NAME (SUBTITLE) */}
+      <span className="text-[11px] text-gray-500 line-clamp-1 mb-1">
+        {item.name}
+      </span>
 
-    {/* Main Highlighted Offer */}
-    <div className="text-sm font-black text-black tracking-tight uppercase">
-      {item.offer || '30-70% OFF'}
-    </div>
-
-    {/* Action Text */}
-    <span className="text-[11px] font-bold text-gray-700 group-hover:text-[#f97316] group-hover:underline">
-      Shop Now
-    </span>
-  </div>
-</Link>
+      {/* OFFER TEXT */}
+     
+    </Link>
     ))}
   </div>
 </section>
+
 
     </main>
   );

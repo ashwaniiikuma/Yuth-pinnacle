@@ -3,15 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-export default function Home() {
+export default function Beauty() {
   
   // High quality fashion images from Pexels - Inhe real stock photo se replace karein jab ho.
-  const categories = [
-    { name: 'MEN', image: 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/men' },
-    { name: 'WOMEN', image: 'https://images.pexels.com/photos/1183263/pexels-photo-1183263.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/women' },
-    { name: 'KIDS', image: 'https://images.pexels.com/photos/1619801/pexels-photo-1619801.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/kids' },
-    { name: 'BEAUTY', image: 'https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=800', href: '/beauty' },
-  ];
+
 
  const slides = [
     {
@@ -212,112 +207,112 @@ export default function Home() {
     name: "Casual Wear",
     offer: "40-80% OFF",
     image: 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    href: '/men'
   },
   {
     id: 2,
     name: "Ethnic Wear",
     offer: "50-80% OFF",
     image: 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    href: '/women'
   },
   {
     id: 3,
     name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/men'
+    href: '/men'
   },
   {
     id: 4,
     name: "Western Wear",
     offer: "40-80% OFF",
     image: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    href: '/women'
   },
   {
     id: 5,
     name: "Full Sleeve Tees",
     offer: "40-60% OFF",
     image: 'https://ttbazaar.com/cdn/shop/files/34_452f652d-56a8-4426-b976-f5ce432e1c6f.jpg?v=1760328571',
-    href: '/products/men',
+    href: '/men',
   }, 
   {
     id: 6,
     name: "Layered Shirts",
     offer: "30-60% OFF",
     image: 'https://www.twills.in/cdn/shop/files/E-20848-9393_2_2048x.jpg?v=1747652670',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 7,
     name: "Sportswear",
     offer: "30-80% OFF",
     image: 'https://izzyapparel.com/wp-content/uploads/2024/01/Website-1-mob-min.jpg',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 8,
     name: "High Neck Tops",
     offer: "UP TO 50% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTko5-kThqKd2e9ION8jd8vPByyqhM6_JcdUeZhlftR5XCNNvMp_hSAmFYe&s=10',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 9,
     name: "Innerwear",
     offer: "UP TO 70% OFF",
     image: 'https://img.tatacliq.com/images/i30/437Wx649H/MP000000030018468_437Wx649H_202602081818291.jpeg',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 10,
     name: "Polo Wear",
     offer: "40-70% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIqqHGjjC0IuGjQ0IiknCfGl_2Il_SOb3Hmp0ckqLn2A&s=10',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 11,
     name: "Kids Wear",
     offer: "30-70% OFF",
     image: 'https://t4.ftcdn.net/jpg/03/51/36/87/360_F_351368733_Fa4b4G0LmmR4jQmlcChzgVmnuGm0SLFY.jpg',
-    href: '/products/kid',
+    href: '/kids',
   },
   {
     id: 12,
     name: "Inclusive Style",
     offer: "40-80% OFF",
     image: 'https://www.stitchfix.com/men/blog/wp-content/uploads/2021/08/21-03-30_M_OF_V15_0069_2x3-683x1024.jpeg',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 13,
     name: "Work Wear",
     offer: "30-70% OFF",
     image: 'https://www.marksandspencer.in/on/demandware.static/-/Sites-mnsindia-Library/en_IN/dw58144f8c/mns-india-homepage/2022/easy-office-outfit-ideas-for-him-and-herImage1.jpg',
-    href: '/products/men',
+    href: '/men',
   },
   {
     id: 14,
     name: "Sleepwear",
     offer: "40-60% OFF",
     image: 'https://cdn.shopify.com/s/files/1/0266/6276/4597/files/301079023ELDERBERRY_1_800x.jpg?v=1785924014&width=700&height=933&crop=center',
-    href: '/products/women',
+    href: '/women',
   },
   {
     id: 15,
     name: "Beauty & Makeup",
     offer: "UP TO 60% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGC7Dt5sRFn39MfypHGGlgSJ0VXdpUDdRi8bMgRCnu-A&s=10',
-    href: '/products/beauty'
+    href: '/beauty'
   },
   {
     id:16,
     name: "Size-inclusive Styles",
     offer:"UP to 30%-50%",
     image:'https://www.lindseybrown.com/cdn/shop/files/AquasilktiedyesilkkaftantowearonholidaybyLindseyBrownluxuryresortwear_c479d089-6443-499c-82a6-a171bfca6fd9.jpg?v=1758041571&width=2048',
-    href:'/products/women',
+    href:'women',
   }
 
       
