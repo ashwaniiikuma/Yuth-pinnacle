@@ -9,43 +9,43 @@ export default function Beauty() {
 
 
  const slides = [
-    {
-      id: 1,
-      type: 'full', // Full Width Banner
-      image: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      title: 'Gen-Z Fashion For All',
-      subtitle: 'fwd',
-      offer: 'UNDER ₹999',
-      buttonText: 'SHOP NOW >',
-      link: '/fwd'
-    },
-    {
-      id: 2,
-      type: 'split', // Image + Text Banner
-      image: 'https://images.pexels.com/photos/3735641/pexels-photo-3735641.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'U.S. POLO ASSN.',
-      offer: 'Up To 50% Off',
-      link: '/brand/us-polo'
-    },
-    {
-      id: 3,
-      type: 'split',
-      image: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'HANDBAGS',
-      offer: 'Min. 60% Off',
-      brandLogo: 'CAPRESE',
-      link: '/category/handbags'
-    },
-    {
-      id: 4,
-      type: 'split',
-      image: 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      brandName: 'ACTIVEWEAR',
-      offer: '40-70% Off',
-      subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
-    }
-  ];
+  {
+    id: 1,
+    type: 'full', // Full Width Banner
+    image: 'https://as1.ftcdn.net/v2/jpg/08/94/53/18/1000_F_894531857_IOrY15wTvOR9MPd36exueZZcXK2B5EUi.jpg',
+    title: 'LUXURY SKINCARE & GLOW',
+    subtitle: 'BEAUTY EDIT',
+    offer: 'UNDER ₹999',
+    buttonText: 'SHOP NOW >',
+    link: '/products/beauty'
+  },
+  {
+    id: 2,
+    type: 'split', // Image + Text Banner
+    image: 'https://as2.ftcdn.net/v2/jpg/03/72/21/29/1000_F_372212921_l0wtrUbGY168QTCIRHp1W02ug8CVuWSV.jpg',
+    brandName: 'MAYBELLINE & MORE',
+    offer: 'Up To 50% Off',
+    link: '/products/beauty'
+  },
+  {
+    id: 3,
+    type: 'split',
+    image: 'https://as2.ftcdn.net/v2/jpg/09/12/42/25/1000_F_912422517_FpN9POkRRAiQ4s5J9s1JmPRyb8OOOUJy.jpg',
+    brandName: 'PREMIUM PERFUMES',
+    offer: 'Min. 60% Off',
+    brandLogo: 'FRAGRANCE',
+    link: '/products/beauty'
+  },
+  {
+    id: 4,
+    type: 'split',
+    image: 'https://as2.ftcdn.net/v2/jpg/07/11/01/35/1000_F_711013584_RHmRinXNS7d2NLHvw3Qe0LXwQrQia4h6.jpg',
+    brandName: 'HAIR & FACE SERUMS',
+    offer: '40-70% Off',
+    subText: 'Vitamin C | Retinol & More',
+    link: '/products/beauty'
+  }
+];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -96,11 +96,11 @@ export default function Beauty() {
       >
         {slide.type === 'full' ? (
           /* Full Width Banner Layout */
-          <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+          <div className="relative w-full h-full flex object-cover items-center justify-between px-6 md:px-16 bg-amber-200/40">
             <img 
               src={slide.image} 
               alt={slide.title} 
-              className="absolute inset-0 w-full h-full object-cover z-0"
+              className="absolute inset-0 w-full h-full object-contain z-0"
             />
             <div className="relative z-10 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl max-w-xs md:max-w-md shadow-md ml-auto">
               <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-black block mb-1">
@@ -183,173 +183,295 @@ export default function Beauty() {
     ))}
   </div>
 
-</section>
+  </section>
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
-  <div className="relative z-10 text-center max-w-xl mx-auto space-y-1">
-    {/* Metallic Gold Gradient Text */}
-    <h2 className="text-2xl md:text-3xl tracking-[0.2em] font-extrabold underline bg-clip-text text-[#e0a76d] uppercase">
-      SHOP BY CATEGORY
+  <div className="relative z-10 max-w-6xl mx-auto left-0 space-y-1 mb-8">
+    {/* Heading */}
+    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold text-gray-800 hover:text-gray-700 uppercase">
+      Top 10 beauty buy
     </h2>
-    <p className="text-[#c99a66] text-xs md:text-sm font-medium tracking-wide">
-      Handpicked apparel designed for comfort and modern style
-    </p>
   </div>
 
+  {/* Beauty Products Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-4 gap-4 max-w-6xl mx-auto">
+    {[
+      {
+        id: 1,
+        name: "Body Lotion",
+        offer: "40-80% OFF",
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8v8iHPldBjZJecfrmW_DsGDZAMWH-QT6_pRMDE0WEz46zUlGwzbs7oGE&s=10',
+        href: '/products/beauty'
+      },
+      {
+        id: 2,
+        name: "Ani Hairfall Shampoo",
+        offer: "50-80% OFF",
+        image: 'https://thevaanabeauty.com/wp-content/uploads/2025/04/RosemaryAnti-HairfallShampoo_1080X1080__0008_3-PRODUCTIMAGE1-600x600.jpg',
+        href: '/products/beauty'
+      },
+      {
+        id: 3,
+        name: "Maybelline foundation",
+        offer: "30-70% OFF",
+        image: 'https://m.media-amazon.com/images/I/711t9wxyobL._AC_UF1000,1000_QL80_.jpg',
+        href: '/product/beauty'
+      },
+      {
+        id: 4,
+        name: "Face serum",
+        offer: "40-80% OFF",
+        image: 'https://7daysnatural.in/cdn/shop/files/Vitamin_C_Serum_for_Pigmentation.jpg?v=1786006774&width=1780',
+        href: '/product/beauty'
+      },
+      {
+        id: 5,
+        name: "COCO Perfume",
+        offer: "40-60% OFF",
+        image: 'https://vader-prod.s3.amazonaws.com/1763745682-2055112.png',
+        href: '/product/beauty',
+      }, 
+      {
+        id: 6,
+        name: "Hair serum",
+        offer: "30-60% OFF",
+        image: 'https://images-static.nykaa.com/media/catalog/product/7/f/7f508aaL_8901088062398_1.jpg?tr=w-500',
+        href: '/product/beauty',
+      },
+      {
+        id: 7,
+        name: "talc",
+        offer: "30-80% OFF",
+        image: 'https://m.media-amazon.com/images/I/41Y7FvcxRBL._SR559,533_.jpg',
+        href: '/product/beauty',
+      },
+      {
+        id: 8,
+        name: "DENVER DEODORANT",
+        offer: "UP TO 50% OFF",
+        image: 'https://assets.myntassets.com/assets/images/2025/SEPTEMBER/26/4QlAC7pr_5031b57ac1c043b9bb0cb9a1b192a6c8.jpg',
+        href: '/product/beauty',
+      },
+    ].map((item) => (
+      <Link 
+        key={item.id} 
+        href={item.href} 
+        className="group relative aspect-[3/4] w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-[#332b1e] hover:border-[#d4af37] transition-all duration-300 block"
+      >
+        {/* Background Image with Zoom effect */}
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+
+        {/* Dark Gradient Overlay at the bottom so text is readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+        {/* Text Content Overlayed on Image */}
+        <div className="absolute inset-x-0 bottom-0 p-3.5 flex flex-col items-center text-center z-10">
+          <span className="text-[10px] text-gray-300 font-medium tracking-wide line-clamp-1 mb-0.5">
+            {item.name}
+          </span>
+          <span className="text-sm md:text-base font-extrabold text-white tracking-wider uppercase drop-shadow-md">
+            {item.offer || '30-70% OFF'}
+          </span>
+        </div>
+      </Link>
+    ))}
+  </div>
+</section>
+
+<section className="max-w-[1500px] mx-auto px-6 py-12">
+  <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
+    {/* Metallic Gold Gradient Text */}
+    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-800 uppercase">
+      Tranding brands
+    </h2>
+    
+  </div>
 
   {/* Garment Products Grid */}
-  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-8 gap-4">
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-4 gap-4 max-w-6xl mx-auto">
+
     {[
      
   {
     id: 1,
-    name: "Casual Wear",
+    name: "cetaphil",
     offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/men'
+    image: 'https://www.skinhealthandyou.com/cdn/shop/files/GRC100gFoP.jpg?v=1774081204&width=1946',
+    href: '/products/beauty'
   },
   {
     id: 2,
-    name: "Ethnic Wear",
+    name: "HYPHEN",
     offer: "50-80% OFF",
-    image: 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/women'
+    image: 'https://letshyphen.com/cdn/shop/files/0.5___retinal_serum_copy.jpg?v=1737977589&width=533',
+    href: '/products/beauty'
   },
   {
     id: 3,
-    name: "Winter Wear",
+    name: "SWISS BEAUTY",
     offer: "30-70% OFF",
-    image: 'https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/men'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDfe_YIAxV7MRREYUq1d7ThkkrZ3DpXVj7xWiPIDKQ1G_U28vVbn7Txw&s=10',
+    href: '/product/beauty'
   },
   {
     id: 4,
-    name: "Western Wear",
+    name: "EZE PERFUME",
     offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/women'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZzTPEUJw3z7c8iblmHgOSqMceiGcpROXtCAMPpDLASa9BS5HlBsM9nvGT&s=10',
+    href: '/product/beauty'
   },
   {
     id: 5,
-    name: "Full Sleeve Tees",
+    name: "ARABIAN AROMA",
     offer: "40-60% OFF",
-    image: 'https://ttbazaar.com/cdn/shop/files/34_452f652d-56a8-4426-b976-f5ce432e1c6f.jpg?v=1760328571',
-    href: '/men',
+    image: 'https://rukminim2.flixcart.com/image/480/640/xif0q/perfume/x/0/0/-original-imahdpwfbhzzhn6w.jpeg?q=90',
+    href: '/product/beauty',
   }, 
   {
     id: 6,
-    name: "Layered Shirts",
+    name: "REBOOK",
     offer: "30-60% OFF",
-    image: 'https://www.twills.in/cdn/shop/files/E-20848-9393_2_2048x.jpg?v=1747652670',
-    href: '/men',
+    image: 'https://m.media-amazon.com/images/I/41IXwEgaOKL._SL1000_.jpg',
+    href: '/product/beauty',
+  },
+  
+ 
+      
+    ].map((item) => (
+     <Link 
+        key={item.id} 
+        href={item.href} 
+        className="group relative aspect-[3/4] w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-[#332b1e] hover:border-[#d4af37] transition-all duration-300 block"
+      >
+        {/* Background Image with Zoom effect */}
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+
+        {/* Dark Gradient Overlay at the bottom so text is readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+        {/* Text Content Overlayed on Image */}
+        <div className="absolute inset-x-0 bottom-0 p-3.5 flex flex-col items-center text-center z-10">
+          <span className="text-[10px] text-gray-300 font-medium tracking-wide line-clamp-1 mb-0.5">
+            {item.name}
+          </span>
+          <span className="text-sm md:text-base font-extrabold text-white tracking-wider uppercase drop-shadow-md">
+            {item.offer || '30-70% OFF'}
+          </span>
+        </div>
+      </Link>
+    ))}
+  </div>
+</section>
+
+ <section className="max-w-[1500px] mx-auto px-6 py-12">
+  <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
+    {/* Metallic Gold Gradient Text */}
+    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-800 uppercase">
+      Premium picks
+    </h2>
+    
+  </div>
+
+  {/* Garment Products Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-8 gap-4 max-w-6xl mx-auto">
+    {[
+     
+  {
+    id: 1,
+    name: "THE BODYSOAP",
+    offer: "40-80% OFF",
+    image: 'https://media.thebodyshop.in/media/catalog/product/l/o/lotus_1_1_4kbjprcoxy9mlyo8.jpg',
+    href: '/products/beauty'
+  },
+  {
+    id: 2,
+    name: "L'OREAL",
+    offer: "50-80% OFF",
+    image: 'https://images.apollo247.in/pub/media//catalog/product/l/o/lor0527_1_.jpg?tr=q-80,f-webp,w-400,dpr-3,c-at_max%20400w',
+    href: '/products/beauty'
+  },
+  {
+    id: 3,
+    name: "NAUTICA",
+    offer: "30-70% OFF",
+    image: 'https://belvish.com/cdn/shop/products/Nautica-_E2_80_93-Blue-EDT-1.jpg?v=1705610939',
+    href: '/product/beauty'
+  },
+  {
+    id: 4,
+    name: "The FACE SHOP",
+    offer: "40-80% OFF",
+    image: 'https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=540/da/cms-assets/cms/product/rc-upload-1784884680302-855.png',
+    href: '/product/beauty'
+  },
+  {
+    id: 5,
+    name: "TIRTIR",
+    offer: "40-60% OFF",
+    image: 'https://m.media-amazon.com/images/I/71SEwHpsRbL._AC_UF894,1000_QL80_.jpg',
+    href: '/product/beauty',
+  }, 
+  {
+    id: 6,
+    name: "D'ALBA",
+    offer: "30-60% OFF",
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWhCxZFbBqVoya23M5TC9lhWD0xvLhrMFb-fWY6rseg&s',
+    href: '/product/beauty',
   },
   {
     id: 7,
-    name: "Sportswear",
+    name: "MATRIX",
     offer: "30-80% OFF",
-    image: 'https://izzyapparel.com/wp-content/uploads/2024/01/Website-1-mob-min.jpg',
-    href: '/men',
+    image: 'https://pinkbliss.in/wp-content/uploads/2023/05/Matrix-Mega-Smooth-Shampoo-200ml-Conditioner-98g-and-Serum-100ml.webp',
+    href: '/product/beauty',
   },
   {
     id: 8,
-    name: "High Neck Tops",
+    name: "BEAUTY OF JOSEAN",
     offer: "UP TO 50% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTko5-kThqKd2e9ION8jd8vPByyqhM6_JcdUeZhlftR5XCNNvMp_hSAmFYe&s=10',
-    href: '/men',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTxfo5T9MBPscsD4CSkjtJhp3BJ-PaN5dfpMdgs3sjCRqE4Cwx0Zn6K4g&s=10',
+    href: '/product/beauty',
   },
-  {
-    id: 9,
-    name: "Innerwear",
-    offer: "UP TO 70% OFF",
-    image: 'https://img.tatacliq.com/images/i30/437Wx649H/MP000000030018468_437Wx649H_202602081818291.jpeg',
-    href: '/men',
-  },
-  {
-    id: 10,
-    name: "Polo Wear",
-    offer: "40-70% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIqqHGjjC0IuGjQ0IiknCfGl_2Il_SOb3Hmp0ckqLn2A&s=10',
-    href: '/men',
-  },
-  {
-    id: 11,
-    name: "Kids Wear",
-    offer: "30-70% OFF",
-    image: 'https://t4.ftcdn.net/jpg/03/51/36/87/360_F_351368733_Fa4b4G0LmmR4jQmlcChzgVmnuGm0SLFY.jpg',
-    href: '/kids',
-  },
-  {
-    id: 12,
-    name: "Inclusive Style",
-    offer: "40-80% OFF",
-    image: 'https://www.stitchfix.com/men/blog/wp-content/uploads/2021/08/21-03-30_M_OF_V15_0069_2x3-683x1024.jpeg',
-    href: '/men',
-  },
-  {
-    id: 13,
-    name: "Work Wear",
-    offer: "30-70% OFF",
-    image: 'https://www.marksandspencer.in/on/demandware.static/-/Sites-mnsindia-Library/en_IN/dw58144f8c/mns-india-homepage/2022/easy-office-outfit-ideas-for-him-and-herImage1.jpg',
-    href: '/men',
-  },
-  {
-    id: 14,
-    name: "Sleepwear",
-    offer: "40-60% OFF",
-    image: 'https://cdn.shopify.com/s/files/1/0266/6276/4597/files/301079023ELDERBERRY_1_800x.jpg?v=1785924014&width=700&height=933&crop=center',
-    href: '/women',
-  },
-  {
-    id: 15,
-    name: "Beauty & Makeup",
-    offer: "UP TO 60% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGC7Dt5sRFn39MfypHGGlgSJ0VXdpUDdRi8bMgRCnu-A&s=10',
-    href: '/beauty'
-  },
-  {
-    id:16,
-    name: "Size-inclusive Styles",
-    offer:"UP to 30%-50%",
-    image:'https://www.lindseybrown.com/cdn/shop/files/AquasilktiedyesilkkaftantowearonholidaybyLindseyBrownluxuryresortwear_c479d089-6443-499c-82a6-a171bfca6fd9.jpg?v=1758041571&width=2048',
-    href:'women',
-  }
+ 
+
 
       
       
     ].map((item) => (
-      <Link 
-  key={item.id} 
-  href={item.href} 
-  className="group bg-[#fff8f5] border-4 border-[#fbdbca] hover:border-[#e0a96d] rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[220px] mx-auto w-full text-center"
->
-  {/* Image Box - Clean Fit without cutting */}
-  <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 p-1">
-    <img 
-      src={item.image} 
-      alt={item.name} 
-      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
-    />
-  </div>
+     <Link 
+        key={item.id} 
+        href={item.href} 
+        className="group relative aspect-[3/4] w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden shadow-lg border border-[#332b1e] hover:border-[#d4af37] transition-all duration-300 block"
+      >
+        {/* Background Image with Zoom effect */}
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
 
-  {/* Product Details - Myntra Minimalist Offer Style */}
-  <div className="p-2.5 bg-[#fff8f5] flex flex-col items-center justify-center space-y-0.5 border-t border-[#fce8de]">
-    {/* Title / Category Name */}
-    <h3 className="text-xs font-semibold text-gray-800 line-clamp-1">
-      {item.name}
-    </h3>
+        {/* Dark Gradient Overlay at the bottom so text is readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-    {/* Main Highlighted Offer */}
-    <div className="text-sm font-black text-black tracking-tight uppercase">
-      {item.offer || '30-70% OFF'}
-    </div>
-
-    {/* Action Text */}
-    <span className="text-[11px] font-bold text-gray-700 group-hover:text-[#f97316] group-hover:underline">
-      Shop Now
-    </span>
-  </div>
-</Link>
+        {/* Text Content Overlayed on Image */}
+        <div className="absolute inset-x-0 bottom-0 p-3.5 flex flex-col items-center text-center z-10">
+          <span className="text-[10px] text-gray-300 font-medium tracking-wide line-clamp-1 mb-0.5">
+            {item.name}
+          </span>
+          <span className="text-sm md:text-base font-extrabold text-white tracking-wider uppercase drop-shadow-md">
+            {item.offer || '30-70% OFF'}
+          </span>
+        </div>
+      </Link>
     ))}
   </div>
 </section>

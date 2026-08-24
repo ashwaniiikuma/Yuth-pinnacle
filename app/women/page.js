@@ -253,7 +253,7 @@ export default function Home() {
     name: "Caps",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1417970847/photo/portrait-of-beautiful-woman-smiling.jpg?s=612x612&w=0&k=20&c=_89eR0g8RaNmCB03Mv3C8ejPka4DrH0z6ISj6QWsnDg=',
-    href: '/men'
+    href: '/products/women'
   },
   {
     id: 2,
@@ -269,7 +269,8 @@ export default function Home() {
     name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://media.istockphoto.com/id/2172654441/photo/portrait-of-a-businesswoman-standing-in-the-office.jpg?s=612x612&w=0&k=20&c=x00T8m9YW-OwM6y_wBwS4jDKgh5B5zdgKVRBaEh9hgs=',
-    href: '/men'
+    href: '/products/women'
+
   },
   {
     id: 4,
@@ -277,7 +278,7 @@ export default function Home() {
     name: "Western Wear",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1200863054/photo/summer-dress.jpg?s=612x612&w=0&k=20&c=8Xyknk_rDuielm1PnOUIvLaKmsqYMnc1HMeqKh60zrk=',
-    href: '/women'
+    href: '/products/women'
   },
   {
     id: 5,
@@ -285,7 +286,8 @@ export default function Home() {
     name: "Full Sleeve Tees",
     offer: "40-60% OFF",
     image: 'https://media.istockphoto.com/id/898031604/photo/smiling-beautiful-woman-in-red-dress-and-high-heels-is-walking.jpg?s=612x612&w=0&k=20&c=u5HxNXOjtMbTrtafPLsBLuAj95-wLeuy9F9VAtLnjiY=',
-    href: '/men',
+        href: '/products/women'
+
   }, 
    {
     id: 6,
@@ -293,7 +295,7 @@ export default function Home() {
     name: "Layered Shirts",
     offer: "30-60% OFF",
     image: 'https://media.istockphoto.com/id/2164305018/photo/laptop-with-modern-gadgets-and-accessories-for-work-and-study-in-backpack-on-white-background.jpg?s=612x612&w=0&k=20&c=EuHKe6ktintFhPqdOC6KkbzxWZbjjHel6yZ8XHlsq9U=',
-    href: '/men',
+    href: '/products/women'
   },
     {
     id: 7,
@@ -301,7 +303,7 @@ export default function Home() {
     name: "Ethnic Wear",
     offer: "50-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStDr0q8hGsC2QFv-DIXFEs831BI1_6oK2r-Dw83u2kqw&s=10',
-    href: '/women'
+    href: '/products/women'
   },
   {
     id: 8,
@@ -309,7 +311,8 @@ export default function Home() {
     name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8xYoQwqAl14hzY_XH2N7rpJY8OsQFn8GVmeaS2ENxA&s=10',
-    href: '/men'
+     href: '/products/women'
+
   },
   {
     id: 9,
@@ -317,7 +320,7 @@ export default function Home() {
     name: "Western Wear",
     offer: "40-80% OFF",
     image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7-DEs9WY4EIGp7KzYyQq-Bj0_QcE4Q7HOLqF2rd8gOg&s=10',
-    href: '/women'
+    href: '/products/women'
   },
       
     ].map((item) => (

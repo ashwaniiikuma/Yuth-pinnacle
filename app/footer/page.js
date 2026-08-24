@@ -148,8 +148,11 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto pt-4 border-t border-[#e0a96d]/30 flex flex-col md:flex-row justify-between items-center text-[11px] text-[#e0a96d] gap-4">
         <p>In case of any concern, <Link href="/contact" className="text-amber-400 font-semibold hover:underline">Contact Us</Link></p>
-        
-        <p className="font-medium text-sm">© 2026 www.jslworks.in All rights reserved.</p>
+  <p className="flex items-center gap-1.5">
+  Made with <span className="text-red-500 animate-pulse">❤️</span> in India <span className="animate-bounce inline-block">🇮🇳</span> 
+</p>
+   <span className='flex items-center'>DPIIT-Recognized Startup</span> 
+        <p className="font-medium text-xs">© 2026 www.jslworks. All rights reserved.</p>
         
         {/* Fixed Image Link */}
         <a 
@@ -165,7 +168,7 @@ export default function Footer() {
             height={24}
             className="h-6 w-6 object-contain rounded"
           />
-          <span className="font-semibold text-sm text-[#e0a96d] group-hover:text-amber-300 transition-colors">
+          <span className="font-semibold text-xs text-[#e0a96d] group-hover:text-amber-300 transition-colors">
             A JSL Works Company
           </span>
         </a>

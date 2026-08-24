@@ -41,15 +41,15 @@ export default async function CategoryPage({params}){
             </div>
 
             {/* RIGHT Section - Product Grid */}
-           <div className="flex-1">
+           <div className="flex-1 w-full min-w-0">
   {filteredProducts.length === 0 ? (
     <div className="text-center py-20 text-gray-400">
       No product found for "{categoryName}"
     </div>
   ) : (
     /* Columns badha kar grid cards ke sizes chote kiye gaye hain */
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
-      {filteredProducts.map((product) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4 min-w-0">
+    {filteredProducts.map((product) => (
         <div
           key={product.id}
           className="bg-[#141310] border border-[#332b1e] rounded-md overflow-hidden hover:border-[#d4af37] transition-all duration-300 group flex flex-col justify-between"
