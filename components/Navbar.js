@@ -834,42 +834,51 @@ export default function Navbar() {
                     <div>
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Topwear</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">T-Shirts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Casual Shirts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Formal Shirts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Sweatshirts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Jackets</Link></li>
-                      </ul>
+                         <li><Link href="/productss?category=beauty&subcategory=lipstick" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Lipstick</Link></li>
+                         <li><Link href="/productss?category=beauty&subcategory=lip-gloss" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Lip Gloss</Link></li>
+                         <li><Link href="/productss?category=beauty&subcategory=lip-liner" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Lip Liner</Link></li>
+                         <li><Link href="/productss?category=beauty&subcategory=eyeliner"  onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Eyeliner</Link></li>
+
+                        </ul>
                     </div>
                     <div>
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Bottomwear</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Jeans</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Casual Trousers</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Track Pants</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=face-moisturiser" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Face Moisturiser</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=cleanser" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">cleanser</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=masks-peel" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Masks & Peel</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=sunscreen" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Sunscreen</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=serum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Serum</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=face-wash" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Face Wash</Link></li>
+
                       </ul>
                     </div>
                     <div>
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Footwear</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Casual Shoes</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Sports Shoes</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Sneakers</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=shampoo" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Shampoo</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=conditioner" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Conditioner</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=hair-cream" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Hair Cream</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=hair-oil" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Hair Oil</Link></li>
+                        <li><Link  href="/productss?category=beauty&subcategory=hair-serum" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d] transition-colors">Hair Serum</Link></li>
+
                       </ul>
                     </div>
                     <div>
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Active Wear</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Active T-Shirts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Tracksuits</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=perfume" onClick={() => setIsMobileMenuOpen(false)}  className="hover:text-[#e0a96d] transition-colors">Perfume</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=deotorent" onClick={() => setIsMobileMenuOpen(false)}  className="hover:text-[#e0a96d] transition-colors">Deotorent</Link></li>
                       </ul>
                     </div>
                     <div>
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Accessories</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Wallets & Belts</Link></li>
-                        <li><Link href="#" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Perfumes</Link></li>
-                      </ul>
+                       <li><Link href="/productss?category=beauty&subcategory=maybelline" onClick={() => setIsMobileMenuOpen(false)}  className="hover:text-[#e0a96d] transition-colors">Maybelline</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=loreal" onClick={() => setIsMobileMenuOpen(false)}  className="hover:text-[#e0a96d] transition-colors">LOreal</Link></li>
+                        <li><Link href="/productss?category=beauty&subcategory=lakme" onClick={() => setIsMobileMenuOpen(false)}  className="hover:text-[#e0a96d] transition-colors">Lakme</Link></li>
+                      
+                        </ul>
                     </div>
                   </div>
                 )}
