@@ -597,7 +597,7 @@ export default function Navbar() {
   <ShoppingBag size={12} />
 
   {/* Mobile View Floating Badge */}
-  <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[5px] w-2 h-2 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
+  <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[7px] w-3 h-3 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
     0
   </span>
 
