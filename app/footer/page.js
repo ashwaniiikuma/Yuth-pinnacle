@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gradient-to-r from-[#0d0d0e] via-[#1a1815] to-[#0d0d0e] text-[#e0a96d] text-xs pt-10 pb-6 px-4 md:px-12 border-t border-[#332b1e]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-8">
         
         {/* Column 1: Links */}
         <div>
@@ -145,13 +145,13 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto pt-4 border-t border-[#e0a96d]/30 flex flex-col md:flex-row justify-between items-center text-[11px] text-[#e0a96d] gap-4">
+      {/* Bottom Bar - Mobile Responsive Fix */}
+      <div className="max-w-7xl mx-auto pt-4 border-t border-[#e0a96d]/30 flex flex-wrap justify-center md:justify-between items-center text-[11px] text-[#e0a96d] gap-4 text-center md:text-left">
         <p>In case of any concern, <Link href="/contact" className="text-amber-400 font-semibold hover:underline">Contact Us</Link></p>
-  <p className="flex items-center gap-1.5">
-  Made with <span className="text-red-500 animate-pulse">❤️</span> in India <span className="animate-bounce inline-block">🇮🇳</span> 
-</p>
-   <span className='flex items-center'>DPIIT-Recognized Startup</span> 
+        <p className="flex items-center justify-center gap-1.5">
+          Made with <span className="text-red-500 animate-pulse">❤️</span> in India <span className="animate-bounce inline-block">🇮🇳</span> 
+        </p>
+        <span className="flex items-center justify-center">DPIIT-Recognized Startup</span> 
         <p className="font-medium text-xs">© 2026 www.jslworks. All rights reserved.</p>
         
         {/* Fixed Image Link */}
@@ -159,7 +159,7 @@ export default function Footer() {
           href="https://www.jslworks.in/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="items-center flex gap-2 group cursor-pointer"
+          className="items-center flex justify-center gap-2 group cursor-pointer w-full md:w-auto mt-2 md:mt-0"
         >
           <Image
             src="/jsl.logo.jpg"

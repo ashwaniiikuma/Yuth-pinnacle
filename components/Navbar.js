@@ -582,19 +582,19 @@ export default function Navbar() {
           {/* Wishlist */}
           <Link 
             href="/wishlist" 
-            className="flex items-center gap-1 text-xs font-semibold px-3 py-2  md:border md:border-[#332b1e] rounded-lg md:hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-gray-300 bg-[#161514]"
+            className="flex items-center gap-1 text-xs font-semibold px-3 py-2  md:border md:border-[#332b1e] rounded-lg md:hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-gray-300 md:bg-[#161514]"
           >
-            <Heart size={15} className="text-[#e0a96d]" />
+            <Heart size={13} className="text-[#e0a96d]" />
             <span className="hidden sm:inline text-xs">Wishlist</span>
           </Link>
 
           {/* Cart Button with Gold Metallic Gradient */}
         <Link 
   href="/cart" 
-  className="flex items-center gap-1 text-[11px] font-bold bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] text-black p-1.5 sm:px-3 sm:py-1.5 rounded-md hover:opacity-90 transition-all shadow-sm active:scale-95 shrink-0 relative"
+  className="flex items-center gap-1 text-[8px] md:text-[11px] font-bold bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] text-black p-1.5 sm:px-3 sm:py-1.5 rounded-md hover:opacity-90 transition-all shadow-sm active:scale-95 shrink-0 relative"
 >
   {/* Shopping Bag Icon */}
-  <ShoppingBag size={15} />
+  <ShoppingBag size={12} />
 
   {/* Mobile View Floating Badge */}
   <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[5px] w-2 h-2 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
