@@ -288,7 +288,7 @@ function CheckoutContent() {
             <div className="flex justify-between items-center">
               <h2 className="text-sm font-bold text-gray-200">Delivery Address</h2>
               <button 
-                onClick={() => router.push("/checkouts/address")}
+                onClick={() => router.push("/checkout/address")}
                 className="text-xs font-bold text-[#d4af37] hover:underline"
               >
                 CHANGE
