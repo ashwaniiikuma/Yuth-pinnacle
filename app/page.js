@@ -192,15 +192,31 @@ export default function Home() {
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
-  <div className="relative z-10 text-center max-w-xl mx-auto space-y-1">
-    {/* Metallic Gold Gradient Text */}
-    <h2 className="text-2xl md:text-3xl tracking-[0.2em] font-extrabold underline bg-clip-text text-[#e0a76d] uppercase">
-      SHOP BY CATEGORY
-    </h2>
-    <p className="text-[#c99a66] text-xs md:text-sm font-medium tracking-wide">
+ <div className="relative z-10 text-center max-w-2xl mx-auto space-y-3 py-8">
+  
+  {/* Top Subtle Decorative Tag */}
+  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-1 shadow-sm">
+    <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse"></span>
+    <span className="text-[10px] md:text-xs tracking-[0.25em] text-[#d4af37] font-bold uppercase">
+      Curated Collections
+    </span>
+  </div>
+
+  {/* Main Heading with Solid & Rich Metallic Gold Look (Fixed Visibility) */}
+  <h2 className="text-2xl md:text-4xl tracking-[0.2em] font-black uppercase text-[#d4af37] drop-shadow-md">
+    SHOP BY CATEGORY
+  </h2>
+
+  {/* Subtitle with Clean Elegant Style */}
+  <div className="flex items-center justify-center gap-3 pt-1">
+    <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent to-[#d4af37]/60"></div>
+    <p className="text-gray-400 text-xs md:text-sm font-medium tracking-wide">
       Handpicked apparel designed for comfort and modern style
     </p>
+    <div className="h-[1px] w-10 md:w-16 bg-gradient-to-l from-transparent to-[#d4af37]/60"></div>
   </div>
+
+</div>
 
 
   {/* Garment Products Grid */}
@@ -326,7 +342,7 @@ export default function Home() {
       <Link 
   key={item.id} 
   href={item.href} 
-  className="group bg-[#fff8f5] border-4 border-[#fbdbca] hover:border-[#e0a96d] rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[220px] mx-auto w-full text-center"
+  className="group bg-[#fff8f5] border-4 border-[#f4cea8] hover:border-[#e0a96d] rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[220px] mx-auto w-full text-center"
 >
   {/* Image Box - Clean Fit without cutting */}
   <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 p-1">

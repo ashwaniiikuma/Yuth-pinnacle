@@ -1,6 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { productsData } from "../data/products"; // ✅ Correct
 
 // Sub-component jahan query params read aur list render ho rahi hain
@@ -46,6 +47,7 @@ function ProductsContent() {
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6">
           {filteredProducts.map((product) => (
+             <Link href={`/product/${product.id}`} key={product.id}>
             <div
               key={product.id}
               className="bg-[#141414] border border-[#222] rounded-xl overflow-hidden p-2.5 md:p-4 hover:border-[#d4af37] transition-all group"
@@ -85,6 +87,7 @@ function ProductsContent() {
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       ) : (

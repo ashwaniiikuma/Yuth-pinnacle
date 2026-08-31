@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link  from 'next/link';
 import React from "react"
 import { productsData } from "@/app/data/products"
 export default async function CategoryPage({params}){
@@ -50,6 +50,8 @@ export default async function CategoryPage({params}){
     /* Columns badha kar grid cards ke sizes chote kiye gaye hain */
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4 min-w-0">
     {filteredProducts.map((product) => (
+      <Link href={`/product/${product.id}`} key={product.id}>
+    
         <div
           key={product.id}
           className="bg-[#141310] border border-[#332b1e] rounded-md overflow-hidden hover:border-[#d4af37] transition-all duration-300 group flex flex-col justify-between"
@@ -83,6 +85,7 @@ export default async function CategoryPage({params}){
             </div>
           </div>
         </div>
+          </Link>
       ))}
     </div>
   )}
