@@ -220,36 +220,36 @@ export default function Home() {
 
 
   {/* Garment Products Grid */}
-  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-8 gap-4">
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 py-8 gap-8">
     {[
      
   {
     id: 1,
     name: "Casual Wear",
     offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    image: 'https://i.pinimg.com/736x/ed/f8/c3/edf8c3e563fb6fd2290ebf56d32d3efd.jpg',
+    href: '/products/men',
   },
   {
     id: 2,
     name: "Ethnic Wear",
     offer: "50-80% OFF",
-    image: 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    image: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSTq4Ldv3xInYq_53n1Vm5lee9eYB0hQHvyl4kMu6_7psImqRfJkOGgKgISzMSEBPgN2IkrVornV9ARwsahxg4Jxwg_E90rGa0ITfTzGR4',
+    href: '/products/women',
   },
   {
     id: 3,
-    name: "Winter Wear",
+    name: "Men's Activewear",
     offer: "30-70% OFF",
-    image: 'https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/men'
+    image: 'https://www.sustainablejungle.com/wp-content/uploads/2024/09/Image-by-Iron-Roots-sustainable-mens-activewear-2.jpg',
+    href: '/products/men',
   },
   {
     id: 4,
     name: "Western Wear",
     offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/women'
+    image: 'https://assets0.mirraw.com/images/12600510/Phv_1009_(1)_zoom.JPG?1719050178',
+    href: '/products/women',
   },
   {
     id: 5,
@@ -262,7 +262,7 @@ export default function Home() {
     id: 6,
     name: "Layered Shirts",
     offer: "30-60% OFF",
-    image: 'https://www.twills.in/cdn/shop/files/E-20848-9393_2_2048x.jpg?v=1747652670',
+    image: 'https://cahoot.in/cdn/shop/files/CSMSSRT3584_2.jpg?v=1783077423&width=1024',
     href: '/products/men',
   },
   {
@@ -274,9 +274,9 @@ export default function Home() {
   },
   {
     id: 8,
-    name: "High Neck Tops",
+    name: "Men's Footwear",
     offer: "UP TO 50% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTko5-kThqKd2e9ION8jd8vPByyqhM6_JcdUeZhlftR5XCNNvMp_hSAmFYe&s=10',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC0o9KHkSP4MxyJuOVbqiwZw7qRui-u-np1yWamtKzSwx_rcI3r6px2PM&s=10',
     href: '/products/men',
   },
   {
@@ -297,21 +297,21 @@ export default function Home() {
     id: 11,
     name: "Kids Wear",
     offer: "30-70% OFF",
-    image: 'https://t4.ftcdn.net/jpg/03/51/36/87/360_F_351368733_Fa4b4G0LmmR4jQmlcChzgVmnuGm0SLFY.jpg',
+    image: 'https://images.jdmagicbox.com/quickquotes/images_main/-5bxhxg9k.jpg',
     href: '/products/kid',
   },
   {
     id: 12,
     name: "Inclusive Style",
     offer: "40-80% OFF",
-    image: 'https://www.stitchfix.com/men/blog/wp-content/uploads/2021/08/21-03-30_M_OF_V15_0069_2x3-683x1024.jpeg',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR3KnZ7AhhVIOpJTHqpq0toaKaUlgn041Wycy7TesyWA&s',
     href: '/products/men',
   },
   {
     id: 13,
-    name: "Work Wear",
+    name: "office Wear",
     offer: "30-70% OFF",
-    image: 'https://www.marksandspencer.in/on/demandware.static/-/Sites-mnsindia-Library/en_IN/dw58144f8c/mns-india-homepage/2022/easy-office-outfit-ideas-for-him-and-herImage1.jpg',
+    image: 'https://i.pinimg.com/474x/ad/26/6e/ad266e5359a1caf55b12dd6fc13fa42b.jpg',
     href: '/products/men',
   },
   {
@@ -325,14 +325,21 @@ export default function Home() {
     id: 15,
     name: "Beauty & Makeup",
     offer: "UP TO 60% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGC7Dt5sRFn39MfypHGGlgSJ0VXdpUDdRi8bMgRCnu-A&s=10',
-    href: '/products/beauty'
+    image: 'https://makeupstudiopro.in/cdn/shop/files/MUST_Offer_August_1080x1080_2_987ba346-f15f-45d2-88b8-b124d47e269f.jpg?v=1786429644&width=1000',
+    href: '/products/beauty',
+  },
+   {
+    id: 16,
+    name: "work Wear",
+    offer: "30-70% OFF",
+    image: 'https://thumbs.dreamstime.com/b/couple-carpenters-communicate-workplace-husband-men-wife-women-spouses-take-break-chatting-talking-fool-around-have-good-316568915.jpg',
+    href: '/products/men',
   },
   {
-    id:16,
+    id:17,
     name: "Size-inclusive Styles",
     offer:"UP to 30%-50%",
-    image:'https://www.lindseybrown.com/cdn/shop/files/AquasilktiedyesilkkaftantowearonholidaybyLindseyBrownluxuryresortwear_c479d089-6443-499c-82a6-a171bfca6fd9.jpg?v=1758041571&width=2048',
+    image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL3yQxqn1D4IkMsme4GxrgJK-wJJ4GGf4polJ9ZRWNZY5Fe1rtpvSd3bY&s=10',
     href:'/products/women',
   }
 
@@ -340,16 +347,16 @@ export default function Home() {
       
     ].map((item) => (
       <Link 
-  key={item.id} 
+  key={item.id}
   href={item.href} 
-  className="group bg-[#fff8f5] border-4 border-[#f4cea8] hover:border-[#e0a96d] rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[220px] mx-auto w-full text-center"
+  className="group bg-[#fff8f5] border-4 border-[#f3bb83] hover:border-[#e0a96d] rounded-b-sm overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col max-w-[200px] mx-auto w-full text-center"
 >
-  {/* Image Box - Clean Fit without cutting */}
-  <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 p-1">
+  {/* Image Box - Fixed height to make all boxes uniform */}
+  <div className="relative h-[240px] w-full p-1 overflow-hidden bg-gray-100">
     <img 
       src={item.image} 
       alt={item.name} 
-      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
     />
   </div>
 

@@ -69,7 +69,7 @@ export default function PaymentPage() {
       
       {/* Top Header & Step Wizard Bar */}
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-4 mb-8 gap-4">
-        <h1 className="text-2xl font-black tracking-wider text-[#d4af37]">YP</h1>
+        <h1 className="text-2xl font-black tracking-wider text-[#d4af37]">YOUTH PINNACLE</h1>
         
         <div className="w-full md:w-1/2">
           <div className="flex items-center justify-between relative">

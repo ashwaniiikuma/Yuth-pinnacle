@@ -2,8 +2,11 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import { productsData } from "@/app/data/products";
+import { useRouter } from "next/navigation";
+import WishlistPage from "@/app/wishlist/page";
 
 export default function ProductDetailPage({ params }) {
+  const router = useRouter();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("M");
   const [activeImage, setActiveImage] = useState("");
@@ -68,13 +71,13 @@ export default function ProductDetailPage({ params }) {
           </div>
 
           {/* Main Large Active Image (Pure clean layout without background box) */}
-          <div className="flex-1 overflow-hidden rounded-2xl flex items-center justify-center">
-            <img 
-              src={activeImage || product.image} 
-              alt={product.title} 
-              className="w-full h-[400px] sm:h-[500px] md:h-[650px] object-cover rounded-2xl shadow-2xl transition-all duration-300" 
-            />
-          </div>
+          <div className="flex-1 overflow-hidden rounded-2xl flex items-center justify-center ">
+  <img 
+    src={activeImage || product.image} 
+    alt={product.title} 
+    className="w-full h-[350px] sm:h-[420px] md:h-[550px] object-contain object-center  shadow-xl transition-all duration-300" 
+  />
+</div>
 
         </div>
 
@@ -165,9 +168,26 @@ export default function ProductDetailPage({ params }) {
             >
             ⚡ Buy Now
             </Link>
-            <button className="flex-1 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37]/10 font-bold py-3.5 rounded-xl transition">
-              ❤️ Wishlist
-            </button>
+            <button 
+  onClick={() => {
+    
+    const existingwishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    
+    //check if product already exists
+    const isAlreadyInWishlist = existingwishlist.some((item)=> item.id === product.id);
+    
+    if(!isAlreadyInWishlist){
+      existingwishlist.push(product);
+      localStorage.setItem("wishlist", JSON.stringify(existingwishlist))
+    }
+    
+    // 3. Redirect to wishlist page
+    router.push("/wishlist");
+  }}
+  className="flex-1 border cursor-pointer border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37]/10 font-bold py-3.5 rounded-xl transition"
+>
+  ❤️ Wishlist
+</button>
           </div>
 
           {/* Pincode & Delivery Checker */}
