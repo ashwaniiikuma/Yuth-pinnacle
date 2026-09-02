@@ -19,16 +19,6 @@ export default function Home() {
       buttonText: 'SHOP NOW >',
       link: '/fwd'
     },
-    // {
-    //   id: 1,
-    //   type: 'Full', // Full Width Banner
-    //   image: 'https://media.istockphoto.com/id/1018293976/photo/attractive-fashionable-woman-posing-in-white-trendy-sweater-beige-pants-and-autumn-heels-on.jpg?s=612x612&w=0&k=20&c=_CLawpZw6l9z0uV4Uon-7lqaS013E853ub883pkIK3c=',
-    //   title: 'Dress',
-    //   subtitle: 'fwd',
-    //   offer: 'UNDER ₹999',
-    //   buttonText: 'SHOP NOW >',
-    //   link: '/fwd'
-    // },
     {
       id: 2,
       type: 'Dresses', // Image + Text Banner
@@ -236,7 +226,7 @@ export default function Home() {
 <section className="max-w-[1500px] mx-auto px-6 py-12">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-500 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em]  tracking-tight font-bold   bg-clip-text text-gray-500 uppercase">
       Biggest deal on top brand
     </h2>
     
@@ -356,10 +346,10 @@ export default function Home() {
   </div>
 </section>
     {/* //Explore Top brands */}
- <section className="max-w-[1300px] mx-auto px-6 py-12">
+ <section className="max-w-[1300px] mx-auto px-6 md:py-12 py-3">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-500 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-tight font-bold   bg-clip-text text-gray-500 uppercase">
       TRANDING AND WESTERN WEAR
     </h2>
     
@@ -445,10 +435,10 @@ export default function Home() {
   </div>
 </section>
 
-  <section className="max-w-[1300px] mx-auto px-6 py-12">
+  <section className="max-w-[1300px] mx-auto px-6 md:py-12 py-3">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-500 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-tight font-bold   bg-clip-text text-gray-500 uppercase">
       TRANDING AND indian WEAR
     </h2>
     
@@ -534,10 +524,10 @@ export default function Home() {
   </div>
 </section>
 
-  <section className="max-w-[1300px] mx-auto px-6 py-12">
+  <section className="max-w-[1300px] mx-auto px-6 md:py-12 py-3">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-4xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-500 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-tight font-bold   bg-clip-text text-gray-500 uppercase">
       TRANDING AND SPORTS WEAR
     </h2>
     

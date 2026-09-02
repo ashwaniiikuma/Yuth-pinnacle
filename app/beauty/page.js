@@ -189,7 +189,7 @@ export default function Beauty() {
  <section className="max-w-[1500px] mx-auto px-6 py-12">
   <div className="relative z-10 max-w-6xl mx-auto left-0 space-y-1 mb-8">
     {/* Heading */}
-    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold text-gray-800 hover:text-gray-700 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-wide font-bold text-gray-800 hover:text-gray-700 uppercase">
       Top 10 beauty buy
     </h2>
   </div>
@@ -286,7 +286,7 @@ export default function Beauty() {
 <section className="max-w-[1500px] mx-auto px-6 py-12">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-800 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-wide font-bold   bg-clip-text text-gray-700 uppercase">
       Tranding brands
     </h2>
     
@@ -375,7 +375,7 @@ export default function Beauty() {
  <section className="max-w-[1500px] mx-auto px-6 py-12">
   <div className="relative z-10  max-w-6xl mx-auto left-0 space-y-1">
     {/* Metallic Gold Gradient Text */}
-    <h2 className="text-2xl md:text-3xl text-left tracking-[0.2em] font-bold   bg-clip-text text-gray-800 uppercase">
+    <h2 className="text-xl md:text-3xl text-left md:tracking-[0.2em] tracking-wide font-bold   bg-clip-text text-gray-600 uppercase">
       Premium picks
     </h2>
     
