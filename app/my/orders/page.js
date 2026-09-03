@@ -27,9 +27,7 @@ export default function OrdersPage() {
         }
       ];
 
-        const existingOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
-        localStorage.setItem("userOrders", JSON.stringify([...existingOrders, newOrderData ]));
-
+      
       setOrders(dummyOrders);
       localStorage.setItem("userOrders", JSON.stringify(dummyOrders));
     } else {
