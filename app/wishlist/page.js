@@ -107,7 +107,7 @@ export default function WishlistPage() {
                   </div>
                     {/* Move to Bag Button */}
                   <button 
-                    onClick={() => moveToBag(item)}
+                    onClick={() => movetocart(item)}
                     className="w-full bg-[#9f2089] hover:bg-[#851972] text-white text-center font-bold py-2 rounded-lg text-xs transition block mt-2">
                     MOVE TO CART
                   </button>

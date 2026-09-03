@@ -556,7 +556,7 @@ export default function Navbar() {
                 <div className="border-t border-[#2a2928]"></div>
 
                 <ul className="space-y-3 font-semibold text-gray-200">
-                  <li><Link href="/orders" className="hover:text-[#d4af37] transition">Orders</Link></li>
+                  <li><Link href="/my/orders" className="hover:text-[#d4af37] transition">Orders</Link></li>
                   <li><Link href="/wishlist" className="hover:text-[#d4af37] transition">Wishlist</Link></li>
                   <li><Link href="/gift-cards" className="hover:text-[#d4af37] transition">Gift Cards</Link></li>
                   <li><Link href="/contact" className="hover:text-[#d4af37] transition">Contact Us</Link></li>
