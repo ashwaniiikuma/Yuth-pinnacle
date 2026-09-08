@@ -5,35 +5,49 @@ import { useRouter } from "next/navigation";
 export default function OrdersPage() {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState("User");
 
   useEffect(() => {
     // LocalStorage se saved orders fetch kar rahe hain
-    const savedOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
-    
-    // Agar koi order nahi hai, toh testing ke liye ek dummy order daal sakte hain 
-    // taaki tracking UI kaisa dikhega wo samajh aa jaye.
-    if (savedOrders.length === 0) {
-      const dummyOrders = [
-        {
-          id: "YP-849201",
-          date: "3rd Sep 2026",
-          title: "Men Black Solid Oversized Fit T-shirt",
-          size: "L",
-          qty: 1,
-          price: 799,
-          image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60",
-          status: "Shipped", // Options: Packed, Shipped, Out for Delivery, Delivered
-          deliveryDate: "Expected by 6th Sep 2026",
-        }
-      ];
+    const email = localStorage.getItem("userEmail");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const name = localStorage.getItem("userName");
 
-      
-      setOrders(dummyOrders);
-      localStorage.setItem("userOrders", JSON.stringify(dummyOrders));
-    } else {
-      setOrders(savedOrders);
+    if(!isLoggedIn || !email){
+      router.push("/login");
+      return;
     }
-  }, []);
+    if(name){
+      setUserName(name);
+    }
+
+    async function  fetchOrders() {
+      try{
+        const res = await fetch(`api/auth/user//orders?email=${email}`);
+        const data = await res.json();
+
+        if(data.success){
+          setOrders(data.orders);
+        }
+
+      }catch(error){
+        console.error("Error fetching orders:", error);
+      }finally{
+        setLoading(false);
+      }
+    }
+    fetchOrders();
+  }, [router]);
+
+  if(loading){
+    return(
+      <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center text-xs">
+        Loading orders...
+      </div>
+
+    )
+  }
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-8 px-4 md:px-12">

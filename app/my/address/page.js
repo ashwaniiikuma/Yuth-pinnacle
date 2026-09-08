@@ -3,21 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AddressPage() {
-  const router = useRouter();
-
-  const [addresses, setAddresses] = useState([
-    {
-      id: 1,
-      name: "Ashwani Kumar",
-      addressLine: "New shiv Mandir, Dhandhera, roorkee",
-      city: "Roorkee",
-      state: "Uttarakhand",
-      pincode: "247666",
-      mobile: "7451832023",
-      tag: "HOME",
-    },
-  ]);
-
+  const router = useRouter(); 
+  const [loading, setLoading] = useState(true);
+  const [addresses, setAddresses] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [newAddress, setNewAddress] = useState({
     name: "Ashwani Kumar",
@@ -30,26 +18,72 @@ export default function AddressPage() {
   });
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("userAddresses"));
-    if (saved) setAddresses(saved);
+    async function fetchAddresses(){
+      try{
+        const email = localStorage.getItem("userEmail");
+        if(!email) return;
+
+        const res = await fetch(`/api/auth/user/address?email=${email}`);
+        const data = await res.json();
+
+        if(data.success){
+          setAddresses(data.addresses);
+        }
+      }catch(error){
+        console.error("Error fetching addresses:", error);
+      }finally{
+        setLoading(false)
+      }
+    }
+    fetchAddresses();
   }, []);
 
-  const handleAddSubmit = (e) => {
+  //form submit hone pe fetch api
+
+  const handleAddSubmit = async (e) => {
     e.preventDefault();
-    const updated = [...addresses, { ...newAddress, id: Date.now() }];
-    setAddresses(updated);
-    localStorage.setItem("userAddresses", JSON.stringify(updated));
-    setShowAddModal(false);
-    setNewAddress({
-      name: "Ashwani Kumar",
-      addressLine: "",
-      city: "",
-      state: "",
-      pincode: "",
-      mobile: "7451832023",
-      tag: "HOME",
-    });
-  };
+    try{
+     const email = localStorage.getItem("userEmail");
+     if(!email){
+      alert("Please login first");
+      return;
+     } 
+     const res = await fetch("/api/auth/user/address",{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({
+          email,
+          address: newAddress,
+        })
+     })
+
+     const data = await res.json();
+
+     if(data.success){
+
+      setAddresses([...addresses,{id: Date.now().toString(), ...newAddress}])
+      setShowAddModal(false);
+
+      setNewAddress({
+          name: "Ashwani Kumar",
+          addressLine: "",
+          city: "",
+          state: "",
+          pincode: "",
+          mobile: "7451832023",
+          tag: "HOME",
+      })
+    }else{
+      alert(data.message || "Failed to save address")
+    }
+    }catch(error){
+      console.error("Error submitting address:", error);
+      alert("Something went wrong");
+     }
+    };
+  
 
   const handleRemove = (id) => {
     const updated = addresses.filter((item) => item.id !== id);

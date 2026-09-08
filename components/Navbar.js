@@ -13,6 +13,7 @@ export default function Navbar() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userName, setUserName] = useState("");
   
   const filteredSuggestions = searchQuery.trim() === ""
       ? []
@@ -23,7 +24,7 @@ export default function Navbar() {
       );
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [mobile, setMobile] = useState('');
+  const [email, setEmail] = useState('');
   
   // Mobile drawer and submenu states
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,17 +33,18 @@ export default function Navbar() {
   useEffect(() => {
     // LocalStorage se exact values read karna
     const loggedInStatus = localStorage.getItem("isLoggedIn");
-    const savedMobile = localStorage.getItem("userMobile");
+    const userEmail = localStorage.getItem("userEmail");
 
-    if (loggedInStatus === "true" && savedMobile) {
+    if (loggedInStatus === "true" && userEmail) {
       setIsLoggedIn(true);
-      setMobile(savedMobile);
+      setEmail(userEmail);
+      setUserName(name || userEmail.split('@')[0]);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userMobile");
+    localStorage.removeItem("userEmail");
     setIsLoggedIn(false);
     window.location.reload();
   };
@@ -519,7 +521,7 @@ export default function Navbar() {
           {/* Account */}
           <div className="relative group py-2">
             <Link 
-              href={isLoggedIn ? "/profile" : "/login"} 
+              href={isLoggedIn ? "/my/profile" : "/login"} 
               className="flex items-center md:gap-2 text-xs font-semibold md:px-3 md:py-2 md:border md:border-[#d4af37] rounded-lg text-[#d4af37] bg-[#161514]"
             >
               <User size={18} className="text-[#d4af37]" />
@@ -531,7 +533,7 @@ export default function Navbar() {
             {/* DROPDOWN MENU */}
             <div className="hidden group-hover:block absolute right-0 top-full pt-2 w-64 z-50">
               <div className="bg-[#121214] border border-[#2a2928] shadow-2xl rounded-xl p-5 text-xs font-normal text-gray-300 space-y-4">
-                {!isLoggedIn ? (
+               {!isLoggedIn ? (
                   <div>
                     <h2 className="font-bold text-white text-base">Welcome</h2>
                     <p className="text-gray-400 text-[11px] mt-0.5 mb-3">
@@ -546,9 +548,9 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div>
-                    <h2 className="font-bold text-white text-base">Hello User</h2>
+                    <h2 className="font-bold text-white text-base">Hello {userName}</h2>
                     <p className="text-[#d4af37] font-semibold text-xs mt-0.5">
-                      +91 {mobile}
+                      {email}
                     </p>
                   </div>
                 )}
@@ -590,23 +592,23 @@ export default function Navbar() {
 
           {/* Cart Button with Gold Metallic Gradient */}
         <Link 
-  href="/cart" 
-  className="flex items-center gap-1 text-[8px] md:text-[11px] font-bold bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] text-black p-1.5 sm:px-3 sm:py-1.5 rounded-md hover:opacity-90 transition-all shadow-sm active:scale-95 shrink-0 relative"
->
-  {/* Shopping Bag Icon */}
-  <ShoppingBag size={12} />
+            href="/cart" 
+            className="flex items-center gap-1 text-[8px] md:text-[11px] font-bold bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] text-black p-1.5 sm:px-3 sm:py-1.5 rounded-md hover:opacity-90 transition-all shadow-sm active:scale-95 shrink-0 relative"
+          >
+            {/* Shopping Bag Icon */}
+            <ShoppingBag size={12} />
 
-  {/* Mobile View Floating Badge */}
-  <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[7px] w-3 h-3 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
-    0
-  </span>
+            {/* Mobile View Floating Badge */}
+            <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[7px] w-3 h-3 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
+              0
+            </span>
 
-  {/* Desktop View Text & Badge */}
-  <span className="hidden sm:inline text-xs">Cart</span>
-  <span className="hidden sm:flex bg-black text-[#d4af37] text-[8px] w-3.5 h-3.5 rounded-full items-center justify-center font-bold">
-    0
-  </span>
-</Link>
+            {/* Desktop View Text & Badge */}
+            <span className="hidden sm:inline text-xs">Cart</span>
+            <span className="hidden sm:flex bg-black text-[#d4af37] text-[8px] w-3.5 h-3.5 rounded-full items-center justify-center font-bold">
+              0
+            </span>
+          </Link>
         </div>
 
       </div>

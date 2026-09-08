@@ -6,19 +6,47 @@ export default function ProfilePage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: "Ashwani Kumar",
-    mobile: "7451832023",
-    email: "- not added -",
-    gender: "- not added -",
-    dob: "- not added -",
-    altMobile: "- not added -",
-    hintName: "- not added -",
+    name:   "",
+    mobile: "" ,
+    email:  "",
+    gender: "",
+    dob: "",
+    altMobile: "",
+    hintName: "",
   });
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const savedProfile = JSON.parse(localStorage.getItem("userProfile"));
-    if (savedProfile) setFormData(savedProfile);
-  }, []);
+useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if(!isLoggedIn || !email){
+      router.push("/login");
+      return;
+    }
+
+    async function fetchUserData(){
+      try{
+        const res = await fetch(`/api/auth/user/profile?email=${email}`);
+        const data = await res.json();
+        if(data.success){
+          setFormData(data.user);
+        }
+      }catch(err){
+        console.error("Error loading profile:", err);
+      }finally{
+        setLoading(false);
+      }
+    }
+    
+    fetchUserData(); // Yeh line function ko execute karegi
+  }, [router]);
+
+
+  if(loading){
+    return <div className="min-h-[85vh] bg-[#0a0a0a] text-white flex items-center justify-center">Loading profile...</div>
+  }
+
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-8 px-4 md:px-12">

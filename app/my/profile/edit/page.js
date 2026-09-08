@@ -6,8 +6,8 @@ export default function EditProfilePage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: "Ashwani Kumar",
-    mobile: "7451832023",
+    name: "",
+    mobile: "",
     email: "",
     gender: "Male",
     dob: "",
@@ -17,14 +17,36 @@ export default function EditProfilePage() {
 
   const [isChangingMobile, setIsChangingMobile] = useState(false);
   const [newMobileInput, setNewMobileInput] = useState("");
+ const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    const savedProfile = JSON.parse(localStorage.getItem("userProfile"));
-    if (savedProfile) {
-      setFormData(savedProfile);
-      setNewMobileInput(savedProfile.mobile || "7451832023");
+   const email = localStorage.getItem("userEmail");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (!isLoggedIn || !email) {
+      router.push("/login");
+      return;
     }
-  }, []);
+  
+  
+
+  async function fetchUserData() {
+      try{
+const res = await fetch(`/api/auth/user/profile?email=${email}`);
+        const data = await res.json();
+        if(data.success){
+          setFormData(data.user);
+          setNewMobileInput(data.user.email);   
+        }
+      
+      }catch (err){
+        console.error("Error fetching user data:", err);
+      }finally{
+        setLoading(false);
+      }
+  }
+  fetchUserData();
+  }, [router]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,19 +57,42 @@ export default function EditProfilePage() {
       alert("Please enter a valid 10-digit mobile number");
       return;
     }
-    const updated = { ...formData, mobile: newMobileInput };
-    setFormData(updated);
-    localStorage.setItem("userProfile", JSON.stringify(updated));
+    setFormData({ ...formData, mobile: newMobileInput });
     setIsChangingMobile(false);
-    alert("Mobile number updated successfully!");
+    alert("Mobile number updated locally. Click 'Save Details' to sync with database.");
+
+   
   };
 
-  const handleSave = (e) => {
+  const handleSave  = async (e) => {
     e.preventDefault();
-    localStorage.setItem("userProfile", JSON.stringify(formData));
-    alert("Profile details updated successfully!");
-    router.push("/my/profile");
+    const email = localStorage.getItem("userEmail");
+
+    try{
+     const res = await fetch(`/api/auth/user/profile`, {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, ...formData })
+});
+      const data = await res.json();
+      
+      if(data.success){
+        alert("Profile details updated successfully!");
+        router.push("/my/profile");
+      }else{
+        alert(data.message || "Failed to update profile");
+      }
+
+    }catch(err){
+      console.error("Error updating profile:", err);
+      alert("Something went wrong!");
+
+    }
   };
+
+  if(loading){
+    return <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-8 px-4 md:px-12">
