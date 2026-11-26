@@ -12,7 +12,7 @@ export async function GET(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db("yuth-pinnacle");
+    const db = client.db("youth-pinnacle");
     const user = await db.collection("users").findOne({ email });
 
     if (!user) {
@@ -23,8 +23,8 @@ export async function GET(request) {
       success: true,
       user: {
         name: user.name || "",
-        mobile: user.phone || phone,
         email: user.email || "",
+        phone: user.phone || user.mobile|| "",
         gender: user.gender || "",
         dob: user.dob || "",
         altMobile: user.altMobile || "",
@@ -42,23 +42,24 @@ export async function GET(request) {
 export async function PUT(request) {
   try {
     const body = await request.json();
-    const { phone, name, email, gender, dob, altMobile, hintName } = body;
+    const { phone, mobile, name, email, gender, dob, altMobile, hintName } = body;
 
     if (!email) {
       return NextResponse.json({ success: false, message: "Phone number is required" }, { status: 400 });
     }
 
     const client = await clientPromise;
-    const db = client.db("yuth-pinnacle");
+    const db = client.db("youth-pinnacle");
 
     const updatedData = {
       name,
+      phone: phone|| mobile || "",
       email,
       gender,
       dob,
       altMobile,
       hintName,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     const result = await db.collection("users").updateOne(

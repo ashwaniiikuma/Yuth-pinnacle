@@ -6,32 +6,33 @@ import { useState, useEffect } from 'react';
 export default function Home() { 
 
  const slides = [
+  
     {
       id: 1,
-      type: 'full', // Full Width Banner
-      image: 'https://media.istockphoto.com/id/1837382224/photo/young-black-man-at-shopping.jpg?s=2048x2048&w=is&k=20&c=w1UEUiJkO2JAnTrHfWugTRM-gEE5MYCHBsGMfWlJxMQ=',
-      title: 'Gen-Z Fashion For All',
-      subtitle: 'fwd',
-      offer: 'UNDER ₹999',
-      buttonText: 'SHOP NOW >',
-      link: '/fwd'
-    },
-    {
-      id: 2,
       type: 'split', // Image + Text Banner
       image: 'https://media.istockphoto.com/id/825083570/photo/latin-man-standing.jpg?s=2048x2048&w=is&k=20&c=pxNzet9482OBHRK0SQrkjHrgwpc5u-9dRedflA2PKNg=',
       brandName: 'Workwear.',
       offer: 'Up To 50% Off',
-      link: '/brand/us-polo'
+      link: "/productss?category=men&subcategory=workwear",
     },
     {
-      id: 3,
+      id: 2,
       type: 'split',
       image: 'https://media.istockphoto.com/id/1402508955/photo/close-up-of-african-american-man-hands.jpg?s=2048x2048&w=is&k=20&c=ha43dfzpvixM9_mHDcFaFuxtc3vq0OW04eVZ2imQwvg=',
       brandName: 'Fessionwear',
       offer: 'Min. 60% Off',
       brandLogo: 'CAPRESE',
-      link: '/category/handbags'
+      link: '/products/men',
+    },
+      {
+      id: 3,
+      type: 'full', // Full Width Banner
+      image: 'https://media.istockphoto.com/id/1837382224/photo/young-black-man-at-shopping.jpg?s=2048x2048&w=is&k=20&c=w1UEUiJkO2JAnTrHfWugTRM-gEE5MYCHBsGMfWlJxMQ=',
+      title: 'Sport shoes',
+      subtitle: 'fwd',
+      offer: 'min 30% off',
+      buttonText: 'SHOP NOW >',
+      link: "/productss?category=men&subcategory=sportscategory"
     },
     {
       id: 4,
@@ -40,8 +41,8 @@ export default function Home() {
       brandName: 'ACTIVEWEAR',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
-    }
+      link: "/productss?category=men&subcategory=activewear",
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -80,90 +81,90 @@ export default function Home() {
     </div>
 
       {/* 2. HERO FEATURED SECTION - Simple & Aesthetic Clothing Image */}
-  <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
+    <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
   {/* Sliding Track Container */}
   <div 
-    className="flex w-full transition-transform duration-700 ease-in-out"
-    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-  >
-    {slides.map((slide) => (
-      <div 
-        key={slide.id} 
-        className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
-      >
-        {slide.type === 'full' ? (
-          /* Full Width Banner Layout */
-          <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+  className="flex w-full transition-transform duration-700 ease-in-out"
+  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+>
+  {slides.map((slide) => (
+    <div 
+      key={slide.id} 
+      className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
+    >
+      {slide.type === 'full' ? (
+        /* Full Width Banner Layout - White box removed, only text */
+        <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+          <img 
+            src={slide.image} 
+            alt={slide.title} 
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+          
+          <div className="relative z-10 p-4 sm:p-6 max-w-xs md:max-w-md ml-auto text-right md:text-left">
+            <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-white block mb-1 drop-shadow-lg">
+              {slide.subtitle}
+            </span>
+            <h3 className="text-base md:text-xl font-extrabold text-white uppercase tracking-wide drop-shadow-lg">
+              {slide.title}
+            </h3>
+            <p className="text-lg md:text-2xl font-black text-amber-400 my-1 drop-shadow-lg">
+              {slide.offer}
+            </p>
+            <Link 
+              href={slide.link} 
+              className="inline-block mt-3 bg-white text-black text-[10px] md:text-xs font-bold px-5 py-2.5 rounded hover:bg-gray-200 transition-all shadow-lg"
+            >
+              {slide.buttonText}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        /* Split Banner Layout (Image Left + Details Right) */
+        <div className="grid grid-cols-12 h-full w-full">
+          
+          {/* Left Side Big Image */}
+          <div className="col-span-8 lg:col-span-9 relative h-full w-full">
+            {slide.brandLogo && (
+              <div className="absolute top-3 left-3 z-10 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
+                {slide.brandLogo}
+              </div>
+            )}
             <img 
               src={slide.image} 
-              alt={slide.title} 
-              className="absolute inset-0 w-full h-full object-cover z-0"
+              alt={slide.brandName} 
+              className="w-full h-full object-cover object-center"
             />
-            <div className="relative z-10 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl max-w-xs md:max-w-md shadow-md ml-auto">
-              <span className="text-2xl md:text-5xl font-serif font-black italic tracking-tighter text-black block mb-1">
-                {slide.subtitle}
-              </span>
-              <h3 className="text-base md:text-xl font-extrabold text-gray-900 uppercase tracking-wide">
-                {slide.title}
-              </h3>
-              <p className="text-lg md:text-2xl font-black text-amber-600 my-1">
-                {slide.offer}
+          </div>
+
+          {/* Right Side Content */}
+          <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 border-l border-gray-100">
+            {slide.subText && (
+              <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+                {slide.subText}
               </p>
+            )}
+            <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
+              {slide.brandName}
+            </h2>
+            <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
+              {slide.offer}
+            </p>
+            <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
               <Link 
                 href={slide.link} 
-                className="inline-block mt-2 bg-black text-white text-[10px] md:text-xs font-bold px-4 py-2 rounded hover:bg-gray-800 transition-all"
+                className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
               >
-                {slide.buttonText}
+                + Explore
               </Link>
             </div>
           </div>
-        ) : (
-          /* Split Banner Layout (Image Left + Details Right) */
-          <div className="grid grid-cols-12 h-full w-full">
-            
-            {/* Left Side Big Image */}
-            <div className="col-span-8 lg:col-span-9 relative h-full w-full">
-              {slide.brandLogo && (
-                <div className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded object-contain text-[10px] font-bold tracking-widest text-gray-700 uppercase">
-                  {slide.brandLogo}
-                </div>
-              )}
-              <img 
-                src={slide.image} 
-                alt={slide.brandName} 
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
 
-            {/* Right Side Content */}
-            <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 bg-white border-l border-gray-100">
-              {slide.subText && (
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-                  {slide.subText}
-                </p>
-              )}
-              <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
-                {slide.brandName}
-              </h2>
-              <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
-                {slide.offer}
-              </p>
-              <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
-                <Link 
-                  href={slide.link} 
-                  className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
-                >
-                  + Explore
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-
+        </div>
+      )}
+    </div>
+  ))}
+</div>
   {/* Bottom Indicator Dots */}
   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
     {slides.map((_, dotIndex) => (
@@ -180,7 +181,7 @@ export default function Home() {
     ))}
   </div>
 
-  </section>
+</section>
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
@@ -200,66 +201,54 @@ export default function Home() {
  {
     id: 1,
     brand: "U.S. POLO ASSN.",
-    name: "Caps",
     offer: "40-80% OFF",
     image: 'https://rukminim2.flixcart.com/image/316/420/xif0q/cap/m/y/x/free-587-55-illearion-original-imahgys5uhc3qext.jpeg?q=90&crop=false',
-    href: '/products/men'
+    href: "/productss?category=men&subcategory=Youth-U.S-Polo-Assn",
   },
   {
     id: 2,
     brand: "LEVI'S",
-    name: "Ethnic Wear",
     offer: "50-80% OFF",
     image: 'https://media.istockphoto.com/id/615085330/photo/sneaker-close-up.jpg?s=612x612&w=is&k=20&c=DrENjRlXjqqnCgHr-mfpE63puWcIdTmevhQI22WpoW8=',
-    href: '/products/men'
+    href: "/productss?category=men&subcategory=Youth-Levi's-store",
   },
   {
     id: 3,
     brand: "TOMMY HILFIGER",
-    name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://images.pexels.com/photos/5967666/pexels-photo-5967666.png',
-    href: '/products/men'
+    href: "/productss?category=men&subcategory=Youth-Tommy-Hilfiger-store",
   },
+
   {
     id: 4,
-    brand: "UNITED COLORS OF BENETTON",
-    name: "Western Wear",
-    offer: "40-80% OFF",
-    image: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/products/men'
-  },
-  {
-    id: 5,
     brand: "NIKE",
-    name: "Full Sleeve Tees",
     offer: "40-60% OFF",
     image: 'https://images.pexels.com/photos/27381875/pexels-photo-27381875.jpeg',
-    href: '/products/men',
+    href:"/productss?category=men&subcategory=-Youth-Nike-store",
   }, 
   {
-    id: 6,
+    id: 5,
     brand: "PUMA",
-    name: "Layered Shirts",
     offer: "30-60% OFF",
     image: 'https://images.pexels.com/photos/6776562/pexels-photo-6776562.jpeg',
-    href: '/products/men',
+    href: "/productss?category=men&subcategory=Youth-Puma-store",
   },
   {
-    id: 7,
+    id: 6,
     brand: "SKECHERS",
     name: "Sportswear",
     offer: "30-80% OFF",
     image: 'https://images.pexels.com/photos/38914244/pexels-photo-38914244.jpeg',
-    href: '/products/men',
+    href: "/productss?category=men&subcategory=Youth-Skechers-store",
   },
   {
-    id: 8,
+    id: 7,
     brand: "CROCS",
     name: "High Neck Tops",
     offer: "UP TO 50% OFF",
     image: 'https://img.kwcdn.com/product/fancy/fa273d57-138b-4078-975c-b638fc94033a.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp',
-    href: '/products/men',
+    href: "/productss?category=men&subcategory=Youth-Crocs-store",
   }
       
     ].map((item) => (
@@ -312,34 +301,30 @@ export default function Home() {
  {
     id: 1,
     brand: "Nick",
-    name: "Caps",
     offer: "40-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNkhPK2onPaG0W2jLhbNvZp-uwQ6WNSDx_To_TGUQH6Q&s=10',
-    href: '/products/men'
+    href: "/productss?category=men&subcategory=Nick",
   },
   {
     id: 2,
     brand: "LEVI'S",
-    name: "Ethnic Wear",
     offer: "50-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStDr0q8hGsC2QFv-DIXFEs831BI1_6oK2r-Dw83u2kqw&s=10',
-    href: 'products/women'
+    href: "/productss?category=men&subcategory=Nick",
   },
   {
     id: 3,
-    brand: "The roadwadge life co.",
-    name: "Winter Wear",
+    brand: "The roadster life co.",
     offer: "30-70% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ__KsMs5xczMy5ORvsVVGMlMz5zp6RUqmSGmB2FIZTqg&s=10',
-    href: 'products/men'
+    href: "/productss?category=men&subcategory=Roadster",
   },
   {
     id: 4,
-    brand: "UNITED COLORS OF BENETTON",
-    name: "Western Wear",
+    brand: "HRX",
     offer: "40-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFEGOGrWUMQe_jna8t6_8Y-cJ0SrHsZWqHyQMae0gQ9A&s=10',
-    href: '/products/men'
+    href: "/productss?category=men&subcategory=Hrx",
   },
  
       

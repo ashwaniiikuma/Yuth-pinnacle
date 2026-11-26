@@ -1,29 +1,60 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
-import { productsData } from "@/app/data/products";
-import { useRouter } from "next/navigation";
-import WishlistPage from "@/app/wishlist/page";
+import { useParams, useRouter } from "next/navigation";
 
-export default function ProductDetailPage({ params }) {
+export default function ProductDetailPage() {
   const router = useRouter();
+  const params = useParams();
+  const id = params?.id;
+
+  
   const [product, setProduct] = useState(null);
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [originalPrice, setOriginalPrice] = useState(0);
   const [selectedSize, setSelectedSize] = useState("M");
   const [activeImage, setActiveImage] = useState("");
   const [pincode, setPincode] = useState("");
   const [deliveryStatus, setDeliveryStatus] = useState(null);
 
-  useEffect(() => {
-    async function getProduct() {
-      const resolvedParams = await params;
-      const found = productsData.find((item) => item.id.toString() === resolvedParams.id);
-      setProduct(found);
-      if (found) {
-        setActiveImage(found.image);
+ useEffect(() => {
+    // Agar id nahi hai, ya string "undefined" hai, toh return kar jao
+    if (!id || id === "undefined") return;
+
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`/api/product/${id}`);
+        const data = await res.json();
+
+        if (data.success) {
+          setProduct(data.product);
+        } else {
+          console.error("Product not found");
+        }
+      } catch (error) {
+        console.log("Error fetching product:", error);
       }
-    }
-    getProduct();
-  }, [params]);
+    };
+    fetchProduct();
+  }, [id]);
+
+  const handleSizeSelect = (size) =>{
+    setSelectedSize(size);
+    if(!product) return;
+
+    let basePrice = product.price;
+    let baseOriginal = product.originalPrice || product.price * 1.5
+  
+    let extraCharge = 0;
+
+    if (size === "L") extraCharge = 20;
+    if (size === "XL") extraCharge = 50;
+    if (size === "XXL") extraCharge = 80; 
+    
+    setCurrentPrice(basePrice + extraCharge);
+    setOriginalPrice(baseOriginal + extraCharge);
+  
+  }
 
   if (!product) {
     return (
@@ -72,12 +103,12 @@ export default function ProductDetailPage({ params }) {
 
           {/* Main Large Active Image (Pure clean layout without background box) */}
           <div className="flex-1 overflow-hidden rounded-2xl flex items-center justify-center ">
-  <img 
-    src={activeImage || product.image} 
-    alt={product.title} 
-    className="w-full h-[350px] sm:h-[420px] md:h-[550px] object-contain object-center  shadow-xl transition-all duration-300" 
-  />
-</div>
+          <img 
+            src={activeImage || product.image} 
+            alt={product.title} 
+            className="w-full h-[350px] sm:h-[420px] md:h-[550px] object-contain object-center  shadow-xl transition-all duration-300" 
+          />
+        </div>
 
         </div>
 
@@ -101,10 +132,11 @@ export default function ProductDetailPage({ params }) {
           
           {/* Price Section */}
           <div className="flex items-center gap-3 mt-4 border-b border-[#332b1e] pb-4">
-            <span className="text-3xl font-bold text-[#d4af37]">₹{product.price}</span>
+            <span className="text-3xl font-bold text-[#d4af37]">₹{currentPrice>0? currentPrice : (product?.price || 0)}</span>
             {product.originalPrice && (
-              <span className="text-gray-500 line-through text-lg">₹{product.originalPrice}</span>
-            )}
+<span className="text-gray-500 line-through text-lg">
+              ₹{originalPrice > 0 ? originalPrice : (product?.originalPrice || (product?.price ? product.price * 1.5 : 0))}
+            </span>            )}
             {product.discount && (
               <span className="text-green-400 text-sm font-semibold">{product.discount} OFF</span>
             )}
@@ -112,17 +144,40 @@ export default function ProductDetailPage({ params }) {
 
           <p className="text-xs text-green-400 mt-2 font-medium">inclusive of all taxes</p>
 
-          {/* Size Selection */}
+         {/* Size Selection */}
           <div className="mt-6">
             <div className="flex justify-between items-center mb-2">
-              <p className="text-xs text-gray-300 font-semibold uppercase">Select Size</p>
-              <span className="text-xs text-[#d4af37] cursor-pointer hover:underline">Size Chart</span>
+              <p className="text-xs text-gray-300 font-semibold uppercase">
+                {product.category === "beauty" || product.category === "makeup" || product.category === "skincare" || product.subcategory?.includes('saree') || product.category === 'sarees'
+                ? "Select Pack / Quantity"
+                : "Select Size"
+                }
+                   </p>
+                {product.category !== "beauty" && !product.subcategory?.includes('saree') && product.category !== 'sarees' &&(
+                  <span className="text-xs text-[#d4af37] cursor-pointer hover:underline">Size Chart</span>
+                )}
+            
             </div>
             <div className="flex flex-wrap gap-3">
-              {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+                {product.category === "beauty" || product.category === "makeup" || product.category === "skincare" || product.subcategory?.includes('saree') || product.category === 'sarees' ? (
+                  // Beauty products ya Sarees ke liye "Free Size" ya "Onesize" option
+                <button
+                onClick={() => setSelectedSize("Onesize")}
+                className={`border px-6 py-2 rounded-lg text-sm cursor-pointer font-medium transition ${
+                    selectedSize === "Onesize" || selectedSize === "Free Size"
+                      ? 'border-[#d4af37] bg-[#d4af37]/10 text-[#d4af37]' 
+                      : 'border-zinc-700 text-gray-300 hover:border-gray-500'
+                  }`}
+                >
+                  {product.sizeLabl || "Onesize"}
+                </button>
+                ):(
+
+              // Baaki cloths/Garments ke liye S, M, L, XL, XXL
+              ['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
                 <button 
                   key={size} 
-                  onClick={() => setSelectedSize(size)}
+                  onClick={() => handleSizeSelect(size)}
                   className={`border px-4 py-2 rounded-lg text-sm font-medium transition ${
                     selectedSize === size 
                       ? 'border-[#d4af37] bg-[#d4af37]/10 text-[#d4af37]' 
@@ -131,58 +186,83 @@ export default function ProductDetailPage({ params }) {
                 >
                   {size}
                 </button>
-              ))}
+              ))
+              )}
             </div>
           </div>
 
           {/* Action Buttons (Add to Cart & Wishlist) */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button 
-            onClick={()=>{
+            onClick={ async()=>{
               if(!selectedSize){
                 alert("Please select a size first!");
                 return;
               }
-              //cart item 
-              const cartItem = {
-                id:product.id,
-                name:product.name,
-                price:product.price,
-                image:product.image,
-                size:selectedSize,
-                quantity:1
-              };
-              //save in localstorage 
-              const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-              existingCart.push(cartItem);
-              localStorage.setItem("cart", JSON.stringify(existingCart));
+            const userId = localStorage.getItem("userId") || "guest-user-1";
 
-              //cart page redirect karna
-              window.location.href = "/cart";
+            try{
+              const response = await fetch("/api/cart",{
+                method: "POST",
+                headers:{
+                  "Content-Type": "application/json",
+                },
+               body: JSON.stringify({
+              userId: userId,
+              productId: product._id || product.id,
+              quantity: 1,
+              size: selectedSize,
+              price: currentPrice || product.price,
+              originalPrice: originalPrice || product.originalPrice, // <-- Yeh bhejna zaroori hai
+              name: product.title,
+              image: activeImage || product.image
+            })
+              });
+              const data = await response.json();
+              if(data.success){
+                window.location.href = "/cart";
+              }
+            }catch(error){
+              console.error("Error adding to cart:", error);
+              alert("Something went wrong!");
+            }
             }}
             className="flex-1 bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] text-black font-extrabold py-3.5 rounded-xl transition text-center flex items-center justify-center shadow-lg hover:opacity-90 cursor-pointer"  >
             🛒 Add to Cart
             </button>
-            <Link href={`/checkoutt?id=${product.id}&size=${selectedSize}`} 
-            className="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3.5 rounded-xl transition text-center flex items-center justify-center shadow-lg"
-            >
-            ⚡ Buy Now
-            </Link>
-            <button 
-  onClick={() => {
-    
-    const existingwishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    
-    //check if product already exists
-    const isAlreadyInWishlist = existingwishlist.some((item)=> item.id === product.id);
-    
-    if(!isAlreadyInWishlist){
-      existingwishlist.push(product);
-      localStorage.setItem("wishlist", JSON.stringify(existingwishlist))
+          <Link 
+        href={`/checkouts/payment?id=${product._id}&size=${selectedSize}`}
+className="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3.5 rounded-xl transition text-center flex items-center justify-center shadow-lg"
+>
+  ⚡ Buy Now
+</Link>
+           <button 
+  onClick={async () => {
+    try {
+      const userId = localStorage.getItem("userId") || "guest-user-1";
+      
+      console.log("sending User:", userId),
+      console.log("Sending Product:", product);
+      // Backend API ko request bhejna taaki item database wishlist mein save ho jaye
+      const res = await fetch("/api/wishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, product }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // Redirect to wishlist page after saving to DB
+        router.push("/wishlist");
+      } else {
+        alert(data.error || "Failed to add to wishlist");
+      }
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
     }
-    
-    // 3. Redirect to wishlist page
-    router.push("/wishlist");
   }}
   className="flex-1 border cursor-pointer border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37]/10 font-bold py-3.5 rounded-xl transition"
 >

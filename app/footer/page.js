@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 export default function Footer() {
   const popularSearches = [
-    "Makeup", "Dresses For Girls", "T-Shirts", "Sandals", "Headphones", "Babydolls", 
+    "Makeup", "Dresses For Girls", "T-Shirts", "Sandals", "Babydolls", 
     "Blazers For Men", "Handbags", "Sport Shoes", "Reebok Shoes", 
     "Puma Shoes", "Boxers", "Tops", "Earrings", "Kurtis", 
-    "Nike", "Smart Watches", "Titan Watches", "Designer Blouse", "Gowns", "Rings", 
-    "Forever 21", "Eye Makeup", "Photo Frames", "Punjabi Suits", "Bikini", 
+    "Nike", "Titan Watches", "Designer Blouse", "Gowns", "Rings", 
+    "Forever 21", "Eye Makeup", "Photo Frames", "Punjabi Suits",
     "Lipstick", "Saree", "Dresses", "Lehenga", "Goggles", "Bras", 
     "Suit", "Chinos", "Shoes", "Adidas Shoes", "Woodland Shoes", "Jewellery", "Designers Sarees"
   ];
@@ -28,26 +28,15 @@ export default function Footer() {
             <li><Link href="/beauty" className="hover:underline">Beauty</Link></li>
           </ul>
 
-          <h4 className="font-bold text-[#e0a96d] text-xs tracking-wider uppercase mt-6 mb-3">Useful Links</h4>
-          <ul className="space-y-1.5 text-[#e0a96d]">
-            <li><Link href="/blog" className="hover:underline">Blog</Link></li>
-            <li><Link href="/careers" className="hover:underline">Careers</Link></li>
-            <li><Link href="/site-map" className="hover:underline">Site Map</Link></li>
-            <li><Link href="/corporate" className="hover:underline">Corporate Information</Link></li>
-          </ul>
         </div>
 
         {/* Column 2: Customer Policies */}
         <div>
           <h4 className="font-bold text-[#e0a96d] text-xs tracking-wider uppercase mb-3">Customer Policies</h4>
           <ul className="space-y-1.5 text-[#e0a96d]">
-            <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-            <li><Link href="/faq" className="hover:underline">FAQ</Link></li>
-            <li><Link href="/tc" className="hover:underline">T&C</Link></li>
             <li><Link href="/terms" className="hover:underline">Terms Of Use</Link></li>
-            <li><Link href="/track" className="hover:underline">Track Orders</Link></li>
-            <li><Link href="/shipping" className="hover:underline">Shipping</Link></li>
-            <li><Link href="/cancellation" className="hover:underline">Cancellation</Link></li>
+            <li><Link href="/my/orders" className="hover:underline">Track Orders</Link></li>
+            <li><Link href="/my/orders" className="hover:underline">Shipping</Link></li>
             <li><Link href="/privacy" className="hover:underline">Privacy policy</Link></li>
           </ul>
         </div>
@@ -103,12 +92,12 @@ export default function Footer() {
 
           <h4 className="font-bold text-[#e0a96d] text-xs tracking-wider uppercase mb-3">Experience Mobile App</h4>
           <div className="flex gap-2">
-            <div className="bg-black text-white border border-[#e0a96d]/30 px-3 py-1.5 rounded text-[10px] font-semibold cursor-pointer hover:border-[#e0a96d]">
+            <Link href="https://play.google.com/store/games?hl=en&pli=1" className="bg-black text-white border border-[#e0a96d]/30 px-3 py-1.5 rounded text-[10px] font-semibold cursor-pointer hover:border-[#e0a96d]">
               Google Play
-            </div>
-            <div className="bg-black text-white border border-[#e0a96d]/30 px-3 py-1.5 rounded text-[10px] font-semibold cursor-pointer hover:border-[#e0a96d]">
+            </Link>
+            <Link href="https://www.apple.com/in/app-store/" className="bg-black text-white border border-[#e0a96d]/30 px-3 py-1.5 rounded text-[10px] font-semibold cursor-pointer hover:border-[#e0a96d]">
               App Store
-            </div>
+            </Link>
           </div>
         </div>
 

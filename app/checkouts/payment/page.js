@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Currency } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function PaymentPage() {
   const router = useRouter();
@@ -10,8 +9,47 @@ export default function PaymentPage() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showQr, setShowQr] = useState(false);
   const [selectedBank, setSelectedBank] = useState("HDFC");
+const [cartItems, setCartItems] = useState([]);
+
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
+  const selectedSize = searchParams.get("size") || "M";
+console.log("Current Product ID from URL:", productId); // Yeh check karo F12 mein kya print ho raha hai!
 
   useEffect(() => {
+    async function fetchPaymentData() {
+      try {
+        // 1. Agar URL mein ID hai
+        if (productId && productId !== "undefined") {
+          const res = await fetch(`/api/product/${productId}`);
+          const data = await res.json();
+
+          if (data.success && data.product) {
+            setCartItems([{
+              ...data.product,
+              size: selectedSize,
+              quantity: 1
+            }]);
+            return;
+          }
+        }
+      
+        // 2. Agar directBuyItem nahi hai, tab Cart API se items fetch karein
+        const userId = localStorage.getItem("userId") || "guest-user-1";
+        const res = await fetch(`/api/cart?userId=${userId}`);
+        const data = await res.json();
+
+        if (data.success && data.cart && data.cart.items) {
+          setCartItems(data.cart.items);
+        }
+      } catch (error) {
+        console.error("Error fetching payment items:", error);
+      }
+    }
+
+    fetchPaymentData();
+
+    // Load saved address from localstorage
     const address = JSON.parse(localStorage.getItem("selectedAddress"));
     if (address) {
       setSelectedAddress(address);
@@ -29,40 +67,127 @@ export default function PaymentPage() {
     });
   };
 
+  const totalProductPrice = cartItems.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);
+ 
+  const totalOriginalPrice = cartItems.reduce((acc, item)=>{
+    const itemMrp = item.originalPrice || item.mrp || item.price || 0;
+    return acc +itemMrp*(item.quantity || 1);
+  
+  }, 0)
+
+  const  productDiscount = totalOriginalPrice>totalProductPrice? totalOriginalPrice-totalProductPrice : 0
+  const onlineExtraDiscount = (paymentType === "online || paymentType === razorpay")? 50 : 0;
+  const totalDiscount = productDiscount + onlineExtraDiscount;
+  const orderTotal = totalProductPrice> 0? totalProductPrice- onlineExtraDiscount : 0;
+
   const handlePlaceOrder = async () => {
-    const res = await loadRazorpayScript();
+    try {
+      
+
+      // Agar cart empty hai toh rok dein
+      if (!cartItems || cartItems.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+              const userId = "guest-user-1";
 
 
-  if(!res) {
-    alert("Razorpay SDK failed to load. Are you online?");
-    return;
-  }
+      // 1. Agar Cash on Delivery (COD) hai toh direct backend par request bhejein
+      if (paymentType === "cod") {
+        const userEmail = localStorage.getItem("userEmail") || "";
+        const apiRes = await fetch("/api/payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: orderTotal,
+            currency: "INR",
+            paymentType: "cod",
+            cartItems: cartItems,
+            shippingAddress: selectedAddress,
+            email: userEmail,
+          }),
+        });
 
-  //Razorpay Options Config
-  const options = {
-    key: "YOUR_RAZORPAY_KEY_ID",
-    amount: paymentType === "online" ? 23900 : 25900,
-    currency: "INR",
-    name: "YP Store",
-    description: "Secure Payment for your order",
-    handler: function (response){
-      alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-      localStorage.removeItem("cart");
-      router.push("/");
-    },
+        const data = await apiRes.json();
+        if (data.success) {
+          alert("Order Placed Successfully via Cash on Delivery!");
+          
+          await fetch(`/api/cart?userId=${userId}`, {method: "DELETE"});
 
-    prefill: {
-      name: selectedAddress?.name || "Customer",
-      email: "customer@example.com",
-      contact: selectedAddress?.phone || "9999999999",
-    },
-    theme: {
-      color: "#d4af37",
-    },
+          localStorage.getItem("selectedAddress");
+          localStorage.removeItem("cartItems");
+          localStorage.removeItem("selectedAddress");
+          router.push("/");
+        } else {
+          alert(data.error || "Something went wrong while placing the order.");
+        }
+        return;
+      }
+
+      // 2. Agar Online Payment hai toh pehle Razorpay script load karein
+      const res = await loadRazorpayScript();
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+
+      const userEmail = localStorage.getItem("userEmail") || ""; // 👈 Email yahan bhi nikalein
+
+      // Backend API ko dynamic orderTotal bhej kar Razorpay Order ID generate karwayein
+      const apiRes = await fetch("/api/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: orderTotal, // Yahan ab dynamic calculated amount jayega
+          currency: "INR",
+          paymentType: "online",
+          cartItems: cartItems,
+          shippingAddress: selectedAddress,
+          email: userEmail,
+        }),
+      });
+
+      const data = await apiRes.json();
+
+      if (!data.success) {
+        alert(data.error || "Something went wrong while creating the order.");
+        return;
+      }
+
+      // 3. Razorpay Options Config
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID",
+        amount: data.amount,
+        currency: data.currency,
+        name: "YP Store",
+        description: "Secure Payment for your order",
+        order_id: data.orderId,
+        handler:async function (response) {
+          alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+         
+         await fetch(`/api/cart?userId=${userId}`, {method: 'DELETE'});
+
+          localStorage.removeItem("selectedAddress");
+          localStorage.removeItem("cartItems");
+          router.push("/");
+        },
+       
+        theme: {
+          color: "#d4af37",
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+
+    } catch (error) {
+      console.error("Payment initiation error:", error);
+      alert("An error occurred during payment initialization.");
+    }
   };
-  const paymentObject = new window.Razorpay(options);
-  paymentObject.open();
-};
+
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-6 px-4 md:px-12">
@@ -341,33 +466,32 @@ export default function PaymentPage() {
           </div>
         </div>
 
-        {/* Right Side: Price Details Box */}
-        <div className="bg-[#141414] border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="font-bold text-sm text-gray-200 border-b border-gray-800 pb-3">
-            Price Details (1 Item)
-          </h3>
+       {/* Right Side: Price Details Box */}
+<div className="bg-[#141414] border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+  <h3 className="font-bold text-sm text-gray-200 border-b border-gray-800 pb-3">
+    Price Details ({cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0)} Item{cartItems.length > 1 ? 's' : ''})
+  </h3>
 
-          <div className="space-y-2 text-xs text-gray-300">
-            <div className="flex justify-between">
-              <span>Product Price</span>
-              <span className="font-semibold">+ ₹269</span>
-            </div>
-            <div className="flex justify-between text-emerald-400">
-              <span>Total Discounts</span>
-              <span className="font-semibold">- ₹10</span>
-            </div>
-          </div>
+  <div className="space-y-2 text-xs text-gray-300">
+    <div className="flex justify-between">
+      <span>Product Price</span>
+      <span className="font-semibold">+ ₹{totalOriginalPrice}</span>
+    </div>
+    <div className="flex justify-between text-emerald-400">
+      <span>Total Discounts</span>
+      <span className="font-semibold">- ₹{totalDiscount}</span>
+    </div>
+  </div>
 
-          <div className="border-t border-gray-800 pt-3 flex justify-between items-center text-sm font-bold text-white">
-            <span>Order Total</span>
-            <span className="text-base text-white">₹259</span>
-          </div>
+  <div className="border-t border-gray-800 pt-3 flex justify-between items-center text-sm font-bold text-white">
+    <span>Order Total</span>
+    <span className="text-base text-white">₹{orderTotal}</span>
+  </div>
 
-          <div className="bg-emerald-950/40 border border-emerald-800/50 p-2.5 rounded-xl text-emerald-400 text-xs text-center font-medium">
-            🛡️ Yay! Your total discount is ₹10
-          </div>
-        </div>
-
+  <div className="bg-emerald-950/40 border border-emerald-800/50 p-2.5 rounded-xl text-emerald-400 text-xs text-center font-medium">
+    🛡️ Yay! Your total discount is ₹{totalDiscount}
+  </div>
+</div>
       </div>
     </div>
   );

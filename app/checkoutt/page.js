@@ -3,7 +3,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
-import { productsData } from "../data/products";
 
 function CheckoutContent() {
   const router = useRouter();
@@ -14,11 +13,43 @@ function CheckoutContent() {
 
   const [product, setProduct] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Find product based on URL id
-    const foundProduct = productsData.find((p) => String(p.id) === String(productId)) || productsData[0];
-    setProduct(foundProduct);
+ useEffect(() => {
+    async function fetchProductDetails() {
+      try {
+        // 1. Agar URL mein valid productId hai, toh API se database wala real product fetch karein
+        if (productId && productId !== "undefined") {
+          const res = await fetch(`/api/product/${productId}`);
+          const data = await res.json();
+          
+          if (data.success && data.product) {
+            setProduct(data.product);
+            setLoading(false);
+            return;
+          }
+        }
+
+        // 2. Fallback: Agar URL mein ID na ho, tab localStorage check karein
+        const savedProduct = JSON.parse(localStorage.getItem("directBuyItem"));
+        if (savedProduct) {
+          setProduct(savedProduct);
+        } else {
+          setProduct({
+            name: "Luxury Product",
+            price: 1999,
+            originalPrice: 3999,
+            image: "/profile-img.png"
+          });
+        }
+      } catch (error) {
+        console.error("Error loading product:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProductDetails();
 
     // Load saved address from localstorage
     const address = JSON.parse(localStorage.getItem("selectedAddress"));
@@ -29,18 +60,18 @@ function CheckoutContent() {
 
   const handleContinueToPayment = () => {
     if (!product) return;
-    // Save current buy item summary for the payment page
     const checkoutItem = {
       ...product,
       size: selectedSize,
       qty: 1
     };
     localStorage.setItem("directBuyItem", JSON.stringify(checkoutItem));
-
-    // Redirect to payment page
     router.push("/checkouts/payment");
   };
 
+  if (loading) {
+    return <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center">Loading checkout...</div>;
+  }
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-6 px-4 md:px-12">
       

@@ -85,10 +85,27 @@ export default function AddressPage() {
     };
   
 
-  const handleRemove = (id) => {
-    const updated = addresses.filter((item) => item.id !== id);
-    setAddresses(updated);
-    localStorage.setItem("userAddresses", JSON.stringify(updated));
+  const handleRemove = async (id) => {
+    try{
+      const email = localStorage.getItem("userEmail");
+
+      const res = await fetch(`/api/auth/user/address?email=${email}&addressId=${id}`,{
+        method: "DELETE",
+      });
+      const data = await res.json();
+
+      if(data.success){
+        const updated = addresses.filter((item)=> item.id !== id && item._id!==id);
+        setAddresses(updated);
+        localStorage.setItem("userAddresses", JSON.stringify(updated));
+
+      }else{
+        alert("Failed to delete address from database");
+      }
+
+    }catch(err){
+      console.error("Error removing address:", err);
+    }
   };
 
   return (

@@ -86,87 +86,87 @@ export default function Beauty() {
   <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
   {/* Sliding Track Container */}
   <div 
-    className="flex w-full transition-transform duration-700 ease-in-out"
-    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-  >
-    {slides.map((slide) => (
-      <div 
-        key={slide.id} 
-        className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
-      >
-        {slide.type === 'full' ? (
-          /* Full Width Banner Layout */
-          <div className="relative w-full h-full flex object-cover items-center justify-between px-6 md:px-16 bg-amber-200/40">
+  className="flex w-full transition-transform duration-700 ease-in-out"
+  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+>
+  {slides.map((slide) => (
+    <div 
+      key={slide.id} 
+      className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
+    >
+      {slide.type === 'full' ? (
+        /* Full Width Banner Layout - White box removed, only text */
+        <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+          <img 
+            src={slide.image} 
+            alt={slide.title} 
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+          
+          <div className="relative z-10 p-4 sm:p-6 max-w-xs md:max-w-md ml-auto text-right md:text-left">
+            <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-white block mb-1 drop-shadow-lg">
+              {slide.subtitle}
+            </span>
+            <h3 className="text-base md:text-xl font-extrabold text-white uppercase tracking-wide drop-shadow-lg">
+              {slide.title}
+            </h3>
+            <p className="text-lg md:text-2xl font-black text-amber-400 my-1 drop-shadow-lg">
+              {slide.offer}
+            </p>
+            <Link 
+              href={slide.link} 
+              className="inline-block mt-3 bg-white text-black text-[10px] md:text-xs font-bold px-5 py-2.5 rounded hover:bg-gray-200 transition-all shadow-lg"
+            >
+              {slide.buttonText}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        /* Split Banner Layout (Image Left + Details Right) */
+        <div className="grid grid-cols-12 h-full w-full">
+          
+          {/* Left Side Big Image */}
+          <div className="col-span-8 lg:col-span-9 relative h-full w-full">
+            {slide.brandLogo && (
+              <div className="absolute top-3 left-3 z-10 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
+                {slide.brandLogo}
+              </div>
+            )}
             <img 
               src={slide.image} 
-              alt={slide.title} 
-              className="absolute inset-0 w-full h-full object-contain z-0"
+              alt={slide.brandName} 
+              className="w-full h-full object-cover object-center"
             />
-            <div className="relative z-10 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl max-w-xs md:max-w-md shadow-md ml-auto">
-              <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-black block mb-1">
-                {slide.subtitle}
-              </span>
-              <h3 className="text-base md:text-xl font-extrabold text-gray-900 uppercase tracking-wide">
-                {slide.title}
-              </h3>
-              <p className="text-lg md:text-2xl font-black text-amber-600 my-1">
-                {slide.offer}
+          </div>
+
+          {/* Right Side Content */}
+          <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 border-l border-gray-100">
+            {slide.subText && (
+              <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+                {slide.subText}
               </p>
+            )}
+            <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
+              {slide.brandName}
+            </h2>
+            <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
+              {slide.offer}
+            </p>
+            <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
               <Link 
                 href={slide.link} 
-                className="inline-block mt-2 bg-black text-white text-[10px] md:text-xs font-bold px-4 py-2 rounded hover:bg-gray-800 transition-all"
+                className="text-[10px] sm:text-xs font-semibold text-gray-500 hover:text-black transition-colors"
               >
-                {slide.buttonText}
+                + Explore
               </Link>
             </div>
           </div>
-        ) : (
-          /* Split Banner Layout (Image Left + Details Right) */
-          <div className="grid grid-cols-12 h-full w-full">
-            
-            {/* Left Side Big Image */}
-            <div className="col-span-8 lg:col-span-9 relative h-full w-full">
-              {slide.brandLogo && (
-                <div className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
-                  {slide.brandLogo}
-                </div>
-              )}
-              <img 
-                src={slide.image} 
-                alt={slide.brandName} 
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
 
-            {/* Right Side Content */}
-            <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 bg-white border-l border-gray-100">
-              {slide.subText && (
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-                  {slide.subText}
-                </p>
-              )}
-              <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
-                {slide.brandName}
-              </h2>
-              <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
-                {slide.offer}
-              </p>
-              <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
-                <Link 
-                  href={slide.link} 
-                  className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
-                >
-                  + Explore
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-
+        </div>
+      )}
+    </div>
+  ))}
+</div>
   {/* Bottom Indicator Dots */}
   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
     {slides.map((_, dotIndex) => (
@@ -183,7 +183,7 @@ export default function Beauty() {
     ))}
   </div>
 
-  </section>
+</section>
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
@@ -202,56 +202,56 @@ export default function Beauty() {
         name: "Body Lotion",
         offer: "40-80% OFF",
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8v8iHPldBjZJecfrmW_DsGDZAMWH-QT6_pRMDE0WEz46zUlGwzbs7oGE&s=10',
-        href: '/products/beauty'
+        href:  "/productss?category=beauty&subcategory=body-lotion",
       },
       {
         id: 2,
-        name: "Ani Hairfall Shampoo",
+        name: "Anti Hairfall Shampoo",
         offer: "50-80% OFF",
         image: 'https://thevaanabeauty.com/wp-content/uploads/2025/04/RosemaryAnti-HairfallShampoo_1080X1080__0008_3-PRODUCTIMAGE1-600x600.jpg',
-        href: '/products/beauty'
+        href: "/productss?category=beauty&subcategory=anti-hairfall-shampoo",
       },
       {
         id: 3,
         name: "Maybelline foundation",
         offer: "30-70% OFF",
         image: 'https://m.media-amazon.com/images/I/711t9wxyobL._AC_UF1000,1000_QL80_.jpg',
-        href: '/product/beauty'
+        href: "/productss?category=beauty&subcategory=maybelline-foundation",
       },
       {
         id: 4,
         name: "Face serum",
         offer: "40-80% OFF",
         image: 'https://7daysnatural.in/cdn/shop/files/Vitamin_C_Serum_for_Pigmentation.jpg?v=1786006774&width=1780',
-        href: '/product/beauty'
+        href: "/productss?category=beauty&subcategory=face-serum",
       },
       {
         id: 5,
         name: "COCO Perfume",
         offer: "40-60% OFF",
         image: 'https://vader-prod.s3.amazonaws.com/1763745682-2055112.png',
-        href: '/product/beauty',
+        href: "/productss?category=beauty&subcategory=coco-perfume",
       }, 
       {
         id: 6,
         name: "Hair serum",
         offer: "30-60% OFF",
         image: 'https://images-static.nykaa.com/media/catalog/product/7/f/7f508aaL_8901088062398_1.jpg?tr=w-500',
-        href: '/product/beauty',
+        href: "/productss?category=beauty&subcategory=hair-serum",
       },
       {
         id: 7,
         name: "talc",
         offer: "30-80% OFF",
         image: 'https://m.media-amazon.com/images/I/41Y7FvcxRBL._SR559,533_.jpg',
-        href: '/product/beauty',
+        href: "/productss?category=beauty&subcategory=talc",
       },
       {
         id: 8,
         name: "DENVER DEODORANT",
         offer: "UP TO 50% OFF",
         image: 'https://assets.myntassets.com/assets/images/2025/SEPTEMBER/26/4QlAC7pr_5031b57ac1c043b9bb0cb9a1b192a6c8.jpg',
-        href: '/product/beauty',
+        href: "/productss?category=beauty&subcategory=denver-deodorant",
       },
     ].map((item) => (
       <Link 
@@ -302,42 +302,42 @@ export default function Beauty() {
     name: "cetaphil",
     offer: "40-80% OFF",
     image: 'https://www.skinhealthandyou.com/cdn/shop/files/GRC100gFoP.jpg?v=1774081204&width=1946',
-    href: '/products/beauty'
+    href: "/productss?category=beauty&subcategory=cetaphil",
   },
   {
     id: 2,
     name: "HYPHEN",
     offer: "50-80% OFF",
     image: 'https://letshyphen.com/cdn/shop/files/0.5___retinal_serum_copy.jpg?v=1737977589&width=533',
-    href: '/products/beauty'
+    href: "/productss?category=beauty&subcategory=hyphen",
   },
   {
     id: 3,
     name: "SWISS BEAUTY",
     offer: "30-70% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDfe_YIAxV7MRREYUq1d7ThkkrZ3DpXVj7xWiPIDKQ1G_U28vVbn7Txw&s=10',
-    href: '/product/beauty'
+    href: "/productss?category=beauty&subcategory=swiss-beauty",
   },
   {
     id: 4,
     name: "EZE PERFUME",
     offer: "40-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZzTPEUJw3z7c8iblmHgOSqMceiGcpROXtCAMPpDLASa9BS5HlBsM9nvGT&s=10',
-    href: '/product/beauty'
+    href: "/productss?category=beauty&subcategory=eze-perfume",
   },
   {
     id: 5,
     name: "ARABIAN AROMA",
     offer: "40-60% OFF",
     image: 'https://rukminim2.flixcart.com/image/480/640/xif0q/perfume/x/0/0/-original-imahdpwfbhzzhn6w.jpeg?q=90',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=arabian-aroma",
   }, 
   {
     id: 6,
     name: "REBOOK",
     offer: "30-60% OFF",
     image: 'https://m.media-amazon.com/images/I/41IXwEgaOKL._SL1000_.jpg',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=rebook",
   },
   
  
@@ -390,56 +390,56 @@ export default function Beauty() {
     name: "THE BODYSOAP",
     offer: "40-80% OFF",
     image: 'https://media.thebodyshop.in/media/catalog/product/l/o/lotus_1_1_4kbjprcoxy9mlyo8.jpg',
-    href: '/products/beauty'
+    href: "/productss?category=beauty&subcategory=bodysoap",
   },
   {
     id: 2,
     name: "L'OREAL",
     offer: "50-80% OFF",
     image: 'https://images.apollo247.in/pub/media//catalog/product/l/o/lor0527_1_.jpg?tr=q-80,f-webp,w-400,dpr-3,c-at_max%20400w',
-    href: '/products/beauty'
+    href: "/productss?category=beauty&subcategory=l'oreal",
   },
   {
     id: 3,
     name: "NAUTICA",
     offer: "30-70% OFF",
     image: 'https://belvish.com/cdn/shop/products/Nautica-_E2_80_93-Blue-EDT-1.jpg?v=1705610939',
-    href: '/product/beauty'
+    href: "/productss?category=beauty&subcategory=nautica",
   },
   {
     id: 4,
-    name: "The FACE SHOP",
+    name: "The FACE SOAP",
     offer: "40-80% OFF",
     image: 'https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=540/da/cms-assets/cms/product/rc-upload-1784884680302-855.png',
-    href: '/product/beauty'
+    href: "/productss?category=beauty&subcategory=faces-soap",
   },
   {
     id: 5,
     name: "TIRTIR",
     offer: "40-60% OFF",
     image: 'https://m.media-amazon.com/images/I/71SEwHpsRbL._AC_UF894,1000_QL80_.jpg',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=tittir",
   }, 
   {
     id: 6,
     name: "D'ALBA",
     offer: "30-60% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWhCxZFbBqVoya23M5TC9lhWD0xvLhrMFb-fWY6rseg&s',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=d'alba",
   },
   {
     id: 7,
     name: "MATRIX",
     offer: "30-80% OFF",
     image: 'https://pinkbliss.in/wp-content/uploads/2023/05/Matrix-Mega-Smooth-Shampoo-200ml-Conditioner-98g-and-Serum-100ml.webp',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=matrix",
   },
   {
     id: 8,
     name: "BEAUTY OF JOSEAN",
     offer: "UP TO 50% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTxfo5T9MBPscsD4CSkjtJhp3BJ-PaN5dfpMdgs3sjCRqE4Cwx0Zn6K4g&s=10',
-    href: '/product/beauty',
+    href: "/productss?category=beauty&subcategory=beauty-of-josean",
   },
  
 

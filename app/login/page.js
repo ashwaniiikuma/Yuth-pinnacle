@@ -10,40 +10,52 @@ export default function LoginPage(){
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        
-        // Simple email validation check
-        if(!email || !email.includes("@") || !agreed) {
-            alert("Please enter a valid email and agree to terms.");
-            return;
+    e.preventDefault();
+    
+    // Simple email validation check
+    if(!email || !email.includes("@") || !agreed) {
+        alert("Please enter a valid email and agree to terms.");
+        return;
+    }
+
+    setLoading(true);
+    try {
+        const res = await fetch('/api/auth/email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        console.log("API se kya data aaya:", data);
+        console.log("User ka role kya hai:", data.role);
+
+        if (data.success) {
+            // LocalStorage mein login status, email, name aur sabse main 'role' save kar do
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userEmail", data.email);
+            localStorage.setItem("userName", data.name);
+            localStorage.setItem("userRole", data.role); // <-- Yeh role save ho gaya
+
+            alert(`Successfully Logged In as ${data.email}`);
+
+            // **Role Based Redirection:** Agar admin hai toh /admin par bhejo, warna home (/) par
+            if (data.role === "admin") {
+                router.push("/admin");
+            } else {
+                router.push("/");
+            }
+            router.refresh();
+        } else {
+            alert(data.message || "Login failed");
         }
 
-        setLoading(true);
-        try {
-            // Optional: Backend mein user save/check karne ke liye API call kar sakte hain
-            const res = await fetch('/api/auth/email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-            });
-            const data = await res.json();
-
-            // LocalStorage mein email save karke login status set kar do
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userEmail", email);
-
-            alert(`Successfully Logged In with ${email}`);
-            router.push("/");
-        } catch(err) {
-            console.error("Login error:", err);
-            // Agar backend API abhi nahi banai hai toh bhi direct login kara sakte hain:
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userEmail", email);
-            router.push("/");
-        } finally {
-            setLoading(false);
-        }
-    };
+    } catch(err) {
+        console.error("Login error:", err);
+        alert("Something went wrong during login.");
+    } finally {
+        setLoading(false);
+    }
+};
 
     return(
       <div className="min-h-[85vh] flex items-center justify-center bg-[#0a0a0a] py-12 px-4">

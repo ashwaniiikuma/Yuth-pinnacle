@@ -17,7 +17,7 @@ export default function Home() {
       subtitle: 'fwd',
       offer: 'UNDER ₹999',
       buttonText: 'SHOP NOW >',
-      link: '/fwd'
+      link: "/productss?category=women&subcategory=dressberry",
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export default function Home() {
       image: 'https://media.istockphoto.com/id/1281612523/photo/diwali-selfie.jpg?s=612x612&w=0&k=20&c=LtS51I1eMKRC9DNXGDc9J632Snqq9gBut1nQ89ovMQw=',
       brandName: 'sarees',
       offer: 'Up To 50% Off',
-      link: '/brand/us-polo'
+      link: "/productss?category=women&subcategory=sarees",
     },
     {
       id: 3,
@@ -34,16 +34,16 @@ export default function Home() {
       brandName: 'Dress',
       offer: 'Min. 60% Off',
       brandLogo: 'CAPRESE',
-      link: '/category/handbags'
+      link: '/products/women'
     },
     {
       id: 4,
       type: 'Split',
       image: 'https://media.istockphoto.com/id/2268425622/photo/woman-wearing-burgundy-t-shirt-on-pink-background-closeup-mockup-for-design.jpg?s=612x612&w=0&k=20&c=5StGnML_MATYJ7RJ7VilU-BxXQmOJRLwGZ0cugQnLJI=',
-      brandName: 'Top&Seets',
+      brandName: 'Top&tees',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=tops-tees",
     },
      {
       id: 5,
@@ -52,7 +52,7 @@ export default function Home() {
       brandName: 'FOOTWEAR',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=footwear"
     },
      {
       id: 6,
@@ -61,7 +61,7 @@ export default function Home() {
       brandName: 'LAUNGEWEAR',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=longewear"
     },
      {
       id: 7,
@@ -70,7 +70,7 @@ export default function Home() {
       brandName: 'ACTIVEWEAR',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=activewear"
     },
      {
       id: 8,
@@ -79,7 +79,7 @@ export default function Home() {
       brandName: 'Casual sportshoes',
       offer: '40-70% Off',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=women-footwear"
     }
     
   ];
@@ -123,87 +123,87 @@ export default function Home() {
   <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
   {/* Sliding Track Container */}
   <div 
-    className="flex w-full transition-transform duration-700 ease-in-out"
-    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-  >
-    {slides.map((slide) => (
-      <div 
-        key={slide.id} 
-        className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
-      >
-        {slide.type === 'full' ? (
-          /* Full Width Banner Layout */
-          <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+  className="flex w-full transition-transform duration-700 ease-in-out"
+  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+>
+  {slides.map((slide) => (
+    <div 
+      key={slide.id} 
+      className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
+    >
+      {slide.type === 'full' ? (
+        /* Full Width Banner Layout - White box removed, only text */
+        <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+          <img 
+            src={slide.image} 
+            alt={slide.title} 
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+          
+          <div className="relative z-10 p-4 sm:p-6 max-w-xs md:max-w-md ml-auto text-right md:text-left">
+            <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-white block mb-1 drop-shadow-lg">
+              {slide.subtitle}
+            </span>
+            <h3 className="text-base md:text-xl font-extrabold text-white uppercase tracking-wide drop-shadow-lg">
+              {slide.title}
+            </h3>
+            <p className="text-lg md:text-2xl font-black text-amber-400 my-1 drop-shadow-lg">
+              {slide.offer}
+            </p>
+            <Link 
+              href={slide.link} 
+              className="inline-block mt-3 bg-white text-black text-[10px] md:text-xs font-bold px-5 py-2.5 rounded hover:bg-gray-200 transition-all shadow-lg"
+            >
+              {slide.buttonText}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        /* Split Banner Layout (Image Left + Details Right) */
+        <div className="grid grid-cols-12 h-full w-full">
+          
+          {/* Left Side Big Image */}
+          <div className="col-span-8 lg:col-span-9 relative h-full w-full">
+            {slide.brandLogo && (
+              <div className="absolute top-3 left-3 z-10 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
+                {slide.brandLogo}
+              </div>
+            )}
             <img 
               src={slide.image} 
-              alt={slide.title} 
-              className="absolute inset-0 w-full h-full object-cover z-0"
+              alt={slide.brandName} 
+              className="w-full h-full object-cover object-center"
             />
-            <div className="relative z-10 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl max-w-xs md:max-w-md shadow-md ml-auto">
-              <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-black block mb-1">
-                {slide.subtitle}
-              </span>
-              <h3 className="text-base md:text-xl font-extrabold text-gray-900 uppercase tracking-wide">
-                {slide.title}
-              </h3>
-              <p className="text-lg md:text-2xl font-black text-amber-600 my-1">
-                {slide.offer}
+          </div>
+
+          {/* Right Side Content */}
+          <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 border-l border-gray-100">
+            {slide.subText && (
+              <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+                {slide.subText}
               </p>
+            )}
+            <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
+              {slide.brandName}
+            </h2>
+            <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
+              {slide.offer}
+            </p>
+            <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
               <Link 
                 href={slide.link} 
-                className="inline-block mt-2 bg-black text-white text-[10px] md:text-xs font-bold px-4 py-2 rounded hover:bg-gray-800 transition-all"
+                className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
               >
-                {slide.buttonText}
+                + Explore
               </Link>
             </div>
           </div>
-        ) : (
-          /* Split Banner Layout (Image Left + Details Right) */
-          <div className="grid grid-cols-12 h-full w-full">
-            
-            {/* Left Side Big Image */}
-            <div className="col-span-8 lg:col-span-9 relative h-full w-full">
-              {slide.brandLogo && (
-                <div className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
-                  {slide.brandLogo}
-                </div>
-              )}
-              <img 
-                src={slide.image} 
-                alt={slide.brandName} 
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
 
-            {/* Right Side Content */}
-            <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 bg-white border-l border-gray-100">
-              {slide.subText && (
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-                  {slide.subText}
-                </p>
-              )}
-              <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
-                {slide.brandName}
-              </h2>
-              <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
-                {slide.offer}
-              </p>
-              <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
-                <Link 
-                  href={slide.link} 
-                  className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
-                >
-                  + Explore
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-
+        </div>
+      )}
+    </div>
+  ))}
+</div>
   {/* Bottom Indicator Dots */}
   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
     {slides.map((_, dotIndex) => (
@@ -237,80 +237,65 @@ export default function Home() {
   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 py-10 gap-4">
     {[
      
- {
-    id: 1,
-    brand: "U.S. POLO ASSN.",
-    name: "Caps",
-    offer: "40-80% OFF",
-    image: 'https://media.istockphoto.com/id/1417970847/photo/portrait-of-beautiful-woman-smiling.jpg?s=612x612&w=0&k=20&c=_89eR0g8RaNmCB03Mv3C8ejPka4DrH0z6ISj6QWsnDg=',
-    href: '/products/women'
-  },
+
   {
     id: 2,
-    brand: "LEVI'S",
-    name: "Ethnic Wear",
+    brand: "BIBA",
     offer: "50-80% OFF",
     image: 'https://media.istockphoto.com/id/144325192/photo/indian-embroidered-womens-apparel.jpg?s=612x612&w=0&k=20&c=Fiy5DTkO9-f7Hz5KWt8Gp7nmZBJB2NCRhQzMQnFUtFw=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=biba",
   },
   {
     id: 3,
     brand: "TOMMY HILFIGER",
-    name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://media.istockphoto.com/id/2172654441/photo/portrait-of-a-businesswoman-standing-in-the-office.jpg?s=612x612&w=0&k=20&c=x00T8m9YW-OwM6y_wBwS4jDKgh5B5zdgKVRBaEh9hgs=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=tommy-hilfiger",
 
   },
   {
     id: 4,
-    brand: "UNITED COLORS OF BENETTON",
-    name: "Western Wear",
+    brand: "ONLY",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1200863054/photo/summer-dress.jpg?s=612x612&w=0&k=20&c=8Xyknk_rDuielm1PnOUIvLaKmsqYMnc1HMeqKh60zrk=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=only",
   },
   {
     id: 5,
-    brand: "NIKE",
-    name: "Full Sleeve Tees",
+    brand: "VERO MODA",
     offer: "40-60% OFF",
     image: 'https://media.istockphoto.com/id/898031604/photo/smiling-beautiful-woman-in-red-dress-and-high-heels-is-walking.jpg?s=612x612&w=0&k=20&c=u5HxNXOjtMbTrtafPLsBLuAj95-wLeuy9F9VAtLnjiY=',
-        href: '/products/women'
+        href:  "/productss?category=women&subcategory=vero-moda",
 
   }, 
    {
     id: 6,
     brand: "FOREVER 21",
-    name: "Layered Shirts",
     offer: "30-60% OFF",
     image: 'https://media.istockphoto.com/id/2164305018/photo/laptop-with-modern-gadgets-and-accessories-for-work-and-study-in-backpack-on-white-background.jpg?s=612x612&w=0&k=20&c=EuHKe6ktintFhPqdOC6KkbzxWZbjjHel6yZ8XHlsq9U=',
-    href: '/products/women'
+    href:  "/productss?category=women&subcategory=forever-21",
   },
     {
     id: 7,
     brand: "LEVI'S",
-    name: "Ethnic Wear",
     offer: "50-80% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStDr0q8hGsC2QFv-DIXFEs831BI1_6oK2r-Dw83u2kqw&s=10',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=levi's",
   },
   {
     id: 8,
     brand: "PUMA",
-    name: "Winter Wear",
     offer: "30-70% OFF",
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8xYoQwqAl14hzY_XH2N7rpJY8OsQFn8GVmeaS2ENxA&s=10',
-     href: '/products/women'
+     href: "/productss?category=women&subcategory=puma",
 
   },
   {
     id: 9,
     brand: "NICK",
-    name: "Western Wear",
     offer: "40-80% OFF",
     image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7-DEs9WY4EIGp7KzYyQq-Bj0_QcE4Q7HOLqF2rd8gOg&s=10',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=nick",
   },
       
     ].map((item) => (
@@ -360,29 +345,15 @@ export default function Home() {
   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 py-10 gap-4">
     {[
      
- {
-    id: 1,
-    brand: "Mose & Milang",
-    name: "The color of this session",
-    offer: "40-80% OFF",
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjhYGk7I5YuePItHyH2gEkMZaaGIdoPd6fZiPO2TM7UQ&s=10',
-    href: '/products/women'
-  },
-  {
-    id: 2,
-    brand: "Mode blocking",
-    name: "your so-fa to fridg look",
-    offer: "50-80% OFF",
-    image: 'https://media.istockphoto.com/id/1204304124/photo/freestyle-diverse-girl-with-leg-prosthesis-standing-isolated-on-grey-full-body-shot-posing.jpg?s=612x612&w=0&k=20&c=9iPREJEQt-hAb-LKb6n7dTGOj0MwEGCOm_CKdt-XpQs=',
-    href: '/products/women'
-  },
+
+
   {
     id: 3,
     brand: "Red TopS & tees",
     name: "The unofficial symbol of thing bold",
     offer: "30-70% OFF",
     image: 'https://media.istockphoto.com/id/2212599525/photo/woman-listening-music-over-headphones-on-yellow-background.jpg?s=612x612&w=0&k=20&c=uicPv3NVi3CDbbgm3dwHRg9hi3CmgkN-L6RRse6V0Ow=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=red-tops-tees",
   },
   {
     id: 4,
@@ -390,7 +361,7 @@ export default function Home() {
     name: "Something new for every day",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/658473364/photo/she-is-a-mystery-for-you.jpg?s=612x612&w=0&k=20&c=tRFka09QzvOfI63bcXSjpeAvikQtW7XmDBO1XFqn0w0=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=smart-daily-wear-tees",
   },
    {
     id: 5,
@@ -398,7 +369,7 @@ export default function Home() {
     name: "When ethic meet esthetic",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1362588255/photo/beautiful-brunette-woman-walking-on-sunset-beach-in-fashionable-maxi-dress-relaxing-on-luxury.jpg?s=612x612&w=0&k=20&c=tmRTVoSbdgsPZOQKRMBOqT9xoOypiEXqMnzTRcFFMt8=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=eco-friendly-dress",
   },
  
       
@@ -422,7 +393,7 @@ export default function Home() {
       </span>
 
       {/* CATEGORY NAME (SUBTITLE) */}
-      <span className="text-[11px] text-gray-500 line-clamp-1 mb-1">
+      <span className="text-[8px] text-gray-500 line-clamp-1 mb-1">
         {item.name}
       </span>
 
@@ -448,22 +419,22 @@ export default function Home() {
   {/* Garment Products Grid */}
   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 py-10 gap-4">
     {[
-     
- {
+      {
     id: 1,
-    brand: "Mose & Milang",
-    name: "For the extra serving of drama",
-    offer: "40-80% OFF",
-    image: 'https://media.istockphoto.com/id/1317633026/photo/beautiful-woman-in-long-dress-front-of-white-background.jpg?s=612x612&w=0&k=20&c=0Nw_siXnFozPKFI47X8jv1Miyy4d3Tea3nFXTT_I3G4=',
-    href: '/products/women'
+    brand: "Print Paradise",
+    name: "For that extra serving of drama",
+    offer: "50-80% OFF",
+    image: 'https://media.istockphoto.com/id/1284220002/photo/portrait-of-beautiful-young-woman-wearing-traditional-indian-dress.jpg?s=612x612&w=0&k=20&c=L5GXEy4O4NtVCwZNAv6aDelCUcW5uZUnT6ifQIaL_TM=',
+    href: "/productss?category=women&subcategory=kurtis-for-women",
   },
+ 
   {
     id: 2,
     brand: "Rehgal musterd",
     name: "The color of classy",
     offer: "50-80% OFF",
     image: 'https://media.istockphoto.com/id/1284220002/photo/portrait-of-beautiful-young-woman-wearing-traditional-indian-dress.jpg?s=612x612&w=0&k=20&c=L5GXEy4O4NtVCwZNAv6aDelCUcW5uZUnT6ifQIaL_TM=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=rehgal-mustered",
   },
   {
     id: 3,
@@ -471,7 +442,7 @@ export default function Home() {
     name: "For a look straight out of bollywood movie",
     offer: "30-70% OFF",
     image: 'https://media.istockphoto.com/id/1363589357/photo/portrait-of-a-woman-sitting-in-an-architectural-dome.jpg?s=612x612&w=0&k=20&c=OxlBtAp6kQIc1eIevTUfXrNJvK7y6GS4PbkqE7a6vu8=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=fusion-dress-from-w",
   },
   {
     id: 4,
@@ -479,7 +450,7 @@ export default function Home() {
     name: "we've found the perfact match",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1501391353/photo/three-beautiful-indian-girls-or-friends-wearing-traditional-cloths-having-fun-together.jpg?s=612x612&w=0&k=20&c=lGhBFO1fsuWQsPCD1gfOl5RUPCPXL0PWjGsICpAVRYQ=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=kurta-sets-by-biba",
   },
    {
     id: 5,
@@ -487,7 +458,7 @@ export default function Home() {
     name: "Breeze dress fit for virtual call",
     offer: "40-80% OFF",
     image: 'https://media.istockphoto.com/id/1362588255/photo/beautiful-brunette-woman-walking-on-sunset-beach-in-fashionable-maxi-dress-relaxing-on-luxury.jpg?s=612x612&w=0&k=20&c=tmRTVoSbdgsPZOQKRMBOqT9xoOypiEXqMnzTRcFFMt8=',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=eco-friendly-dress",
   },
  
       
@@ -544,7 +515,7 @@ export default function Home() {
     name: "For the extra serving of drama",
     offer: "40-80% OFF",
     image:"https://media.istockphoto.com/id/695474472/photo/overhead-shot-of-white-sneakers-on-pink-background.jpg?s=612x612&w=0&k=20&c=GzsXYIfYMrZ2ZHXvM_rImCnBJkjZhgTJOxdMPLOJ22s=",
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=skechars-go-walk",
   },
   {
     id: 2,
@@ -552,7 +523,7 @@ export default function Home() {
     name: "The color of classy",
     offer: "50-80% OFF",
     image: 'https://cdn.media.amplience.net/i/frasersdev/33646403_o?fmt=auto&upscale=false&w=767&h=767&v=20260202110308&sm=scaleFit&$h-ttl$',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=underarmour-rush",
   },
   {
     id: 3,
@@ -560,7 +531,7 @@ export default function Home() {
     name: "For a look straight out of bollywood movie",
     offer: "30-70% OFF",
     image: 'https://kaleidoscope.scene7.com/is/image/OttoUK/300w/Under-Armour-Heat-Gear-Leggings~10G014FRSP.jpg',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=under-armour-collection",
   },
   {
     id: 4,
@@ -568,7 +539,7 @@ export default function Home() {
     name: "we've found the perfact match",
     offer: "40-80% OFF",
     image: 'https://www.changeituptraining.com/static/uploads/images/activewear-wftokvghgomd.jpg',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=women-sportswear",
   },
    {
     id: 5,
@@ -576,7 +547,7 @@ export default function Home() {
     name: "Breeze dress fit for virtual call",
     offer: "40-80% OFF",
     image: 'https://i.pinimg.com/736x/be/c3/6b/bec36bf46b716a45c41724b6d59270d2.jpg',
-    href: '/products/women'
+    href: "/productss?category=women&subcategory=running-shoes",
   },
  
       

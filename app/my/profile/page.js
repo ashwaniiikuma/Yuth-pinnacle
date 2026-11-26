@@ -7,7 +7,7 @@ export default function ProfilePage() {
 
   const [formData, setFormData] = useState({
     name:   "",
-    mobile: "" ,
+    mobile: "7451832023" ,
     email:  "",
     gender: "",
     dob: "",
@@ -30,7 +30,15 @@ useEffect(() => {
         const res = await fetch(`/api/auth/user/profile?email=${email}`);
         const data = await res.json();
         if(data.success){
-          setFormData(data.user);
+          setFormData({
+            name: data.user.name || "",
+            mobile: data.user.phone || data.user.mobile || "",
+            email: data.user.email||"",
+            gender: data.user.gender || "",
+            dob: data.user.dob || "",
+            altMobile: data.user.altMobile || "",
+            hintName: data.user.hintName || "",
+          });
         }
       }catch(err){
         console.error("Error loading profile:", err);

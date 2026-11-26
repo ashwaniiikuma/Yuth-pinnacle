@@ -11,22 +11,28 @@ export async function POST(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db();
+    const db = client.db("youth-pinnacle");
 
     let user = await db.collection("users").findOne({ email });
 
     if(!user){
         const defaultName = email.split('@')[0];
-        await db.collection("users").insertOne({
+        const newUser = {
             email,
             name: defaultName,
+            role:"customer",
             createdAt: new Date(),
             updatedAt: new Date()
-        })
-        user = {email, name: defaultName};
+         };
+         await db.collection("users").insertOne(newUser);
+         user = newUser;
+
+        
     }
     return NextResponse.json({ success: true, message: "Logged in successfully",
-        name: user.name || email.split('@')[0]
+        email:user.email,
+        name: user.name || email.split('@')[0],
+        role: user.role|| "customer"
      }, { status:0 || 200 });
 
   } catch (error) {

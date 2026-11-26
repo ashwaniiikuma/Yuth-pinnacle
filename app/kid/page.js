@@ -11,12 +11,12 @@ export default function Kid() {
     {
       id: 1,
       type: 'full', // Full Width Banner
-      image: 'https://media.istockphoto.com/id/506317910/photo/beautiful-little-girl-model-wearing-a-leopard-dress-and-sunglass.jpg?s=612x612&w=0&k=20&c=KrrWf0Leaw9Zvgb3vpMVks-zvbY86VgZRVMjUxzdwsY=',
+      image: 'https://as1.ftcdn.net/v2/jpg/04/64/71/48/1000_F_464714882_6QNj1owisjMBJi8ExTItjWsTayCx60rH.jpg',
       title: 'KIDWEAR',
       subtitle: 'fwd',
-      offer: 'UNDER ₹999',
+      offer: 'UNDER ₹399',
       buttonText: 'SHOP NOW >',
-      link: '/fwd'
+      link: "/products/kid",
     },
     {
       id: 2,
@@ -24,25 +24,25 @@ export default function Kid() {
       image: 'https://media.istockphoto.com/id/172439451/photo/cheerful-little-indian-girls-and-a-boy-isolated-on-white.jpg?s=612x612&w=0&k=20&c=aEZY0iXIFssi0TJHk76TEJIfuKuk-4nYTiM81jkt_LU=',
       brandName: 'TOP BRANDS',
       offer: 'Up To 50% Off',
-      link: '/brand/us-polo'
+      link: "/products/kid"
     },
     {
       id: 3,
       type: 'split',
       image: 'https://media.istockphoto.com/id/1293357713/photo/short-child-boy-in-red-t-shirt-and-tall-child-boy-in-white-t-shirt-standing-arms-crossed-and.jpg?s=612x612&w=0&k=20&c=AYVxOuZI0jXjh1lv8sNsMm5oEYpUGeI1zdC39Cy52GM=',
       brandName: 'KIDS TSHIRT&SHORTS',
-      offer: 'Min. 60% Off',
+      offer: 'under ₹499',
       brandLogo: 'CAPRESE',
-      link: '/category/handbags'
+      link: '/products/kid'
     },
     {
       id: 4,
       type: 'split',
       image: 'https://media.istockphoto.com/id/915681134/photo/cute-boy-in-the-underwear.jpg?s=612x612&w=0&k=20&c=R9dGDP7dLtWdUrGZI9Y0T7jOb0pbtfZDj-vsGKrK-tk=',
       brandName: 'INNERWEAR',
-      offer: '40-70% Off',
+      offer: 'starting ₹199',
       subText: 'HRX | NIKE & More',
-      link: '/category/activewear'
+      link: "/productss?category=women&subcategory=kids-innerwear"
     }
   ];
 
@@ -82,90 +82,90 @@ export default function Kid() {
     </div>
 
       {/* 2. HERO FEATURED SECTION - Simple & Aesthetic Clothing Image */}
-  <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
+   <section className="w-full max-w-full px-0 py-10 overflow-hidden relative border-b border-gray-100">      
   {/* Sliding Track Container */}
   <div 
-    className="flex w-full transition-transform duration-700 ease-in-out"
-    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-  >
-    {slides.map((slide) => (
-      <div 
-        key={slide.id} 
-        className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
-      >
-        {slide.type === 'full' ? (
-          /* Full Width Banner Layout */
-          <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+  className="flex w-full transition-transform duration-700 ease-in-out"
+  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+>
+  {slides.map((slide) => (
+    <div 
+      key={slide.id} 
+      className="w-full flex-shrink-0 h-[220px] sm:h-[300px] md:h-[480px] bg-white overflow-hidden"
+    >
+      {slide.type === 'full' ? (
+        /* Full Width Banner Layout - White box removed, only text */
+        <div className="relative w-full h-full flex items-center justify-between px-6 md:px-16 bg-amber-200/40">
+          <img 
+            src={slide.image} 
+            alt={slide.title} 
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+          
+          <div className="relative z-10 p-4 sm:p-6 max-w-xs md:max-w-md ml-auto text-right md:text-left">
+            <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-white block mb-1 drop-shadow-lg">
+              {slide.subtitle}
+            </span>
+            <h3 className="text-base md:text-xl font-extrabold text-white uppercase tracking-wide drop-shadow-lg">
+              {slide.title}
+            </h3>
+            <p className="text-lg md:text-2xl font-black text-amber-400 my-1 drop-shadow-lg">
+              {slide.offer}
+            </p>
+            <Link 
+              href={slide.link} 
+              className="inline-block mt-3 bg-white text-black text-[10px] md:text-xs font-bold px-5 py-2.5 rounded hover:bg-gray-200 transition-all shadow-lg"
+            >
+              {slide.buttonText}
+            </Link>
+          </div>
+        </div>
+      ) : (
+        /* Split Banner Layout (Image Left + Details Right) */
+        <div className="grid grid-cols-12 h-full w-full">
+          
+          {/* Left Side Big Image */}
+          <div className="col-span-8 lg:col-span-9 relative h-full w-full">
+            {slide.brandLogo && (
+              <div className="absolute top-3 left-3 z-10 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
+                {slide.brandLogo}
+              </div>
+            )}
             <img 
               src={slide.image} 
-              alt={slide.title} 
-              className="absolute inset-0 w-full h-full object-cover z-0"
+              alt={slide.brandName} 
+              className="w-full h-full object-cover object-center"
             />
-            <div className="relative z-10 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl max-w-xs md:max-w-md shadow-md ml-auto">
-              <span className="text-2xl md:text-5xl font-black italic tracking-tighter text-black block mb-1">
-                {slide.subtitle}
-              </span>
-              <h3 className="text-base md:text-xl font-extrabold text-gray-900 uppercase tracking-wide">
-                {slide.title}
-              </h3>
-              <p className="text-lg md:text-2xl font-black text-amber-600 my-1">
-                {slide.offer}
+          </div>
+
+          {/* Right Side Content */}
+          <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 border-l border-gray-100">
+            {slide.subText && (
+              <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+                {slide.subText}
               </p>
+            )}
+            <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
+              {slide.brandName}
+            </h2>
+            <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
+              {slide.offer}
+            </p>
+            <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
               <Link 
                 href={slide.link} 
-                className="inline-block mt-2 bg-black text-white text-[10px] md:text-xs font-bold px-4 py-2 rounded hover:bg-gray-800 transition-all"
+                className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
               >
-                {slide.buttonText}
+                + Explore
               </Link>
             </div>
           </div>
-        ) : (
-          /* Split Banner Layout (Image Left + Details Right) */
-          <div className="grid grid-cols-12 h-full w-full">
-            
-            {/* Left Side Big Image */}
-            <div className="col-span-8 lg:col-span-9 relative h-full w-full">
-              {slide.brandLogo && (
-                <div className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest text-gray-700 uppercase">
-                  {slide.brandLogo}
-                </div>
-              )}
-              <img 
-                src={slide.image} 
-                alt={slide.brandName} 
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
 
-            {/* Right Side Content */}
-            <div className="col-span-4 lg:col-span-3 h-full flex flex-col justify-center px-4 sm:px-8 md:px-10 py-4 bg-white border-l border-gray-100">
-              {slide.subText && (
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
-                  {slide.subText}
-                </p>
-              )}
-              <h2 className="text-lg sm:text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight uppercase font-serif">
-                {slide.brandName}
-              </h2>
-              <p className="text-xs sm:text-base md:text-xl font-medium text-gray-600 mt-1 sm:mt-2">
-                {slide.offer}
-              </p>
-              <div className="mt-4 sm:mt-8 border-t border-gray-100 pt-2 sm:pt-4">
-                <Link 
-                  href={slide.link} 
-                  className="text-[10px] sm:text-xs font-semibold text-gray-400 hover:text-black transition-colors"
-                >
-                  + Explore
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-
+        </div>
+      )}
+    </div>
+  ))}
+</div>
   {/* Bottom Indicator Dots */}
   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex gap-2 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
     {slides.map((_, dotIndex) => (
@@ -182,7 +182,7 @@ export default function Kid() {
     ))}
   </div>
 
- </section>
+</section>
       {/* 3. CATEGORY GRID (Men, Women, Kids, Beauty) */}
      {/* 3. FEATURED GARMENTS SECTION (Images + Titles + Prices) */}
  <section className="max-w-[1500px] mx-auto px-6 py-12">
@@ -202,61 +202,61 @@ export default function Kid() {
       id: 1,
       name: "PROTECTIVE MASK",
       image:'https://m.media-amazon.com/images/I/61tNVVkzt6L._AC_UF1000,1000_QL80_.jpg',
-      href: '/products/women'
+      href: "/productss?category=kid&subcategory=protective-mask",
     },
     {
       id: 2,
       name: "BABY CARE",
       image: 'https://images-static.nykaa.com/media/catalog/product/5/f/5fec660MAJAB00000226_01.jpg',
-      href: '/products/kid'
+      href:  "/productss?category=kid&subcategory=babycare",
     },
     {
       id: 3,
       name: "SHORTS",
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl9RhgrL_RPRtNxmdoSbA14-PojjuDLBKacjzDDg0gwg&s=10',
-      href: '/products/kid'
+      href:  "/productss?category=kid&subcategory=shorts",
     },
     {
       id: 4,
       name: "VALUE PACKS & SETS",
       image: 'https://img.tatacliq.com/images/i19//437Wx649H/MP000000023415413_437Wx649H_202408241343211.jpeg',
-      href: '/products/kid'
+      href:  "/productss?category=kid&subcategory=valuepack-sets",
     },
     {
       id: 5,
       name: "SLEEPWEAR & INNERWEAR",
       image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB80w9jwi16dPyn1sRMBzicpnUgaXPl3_aR1BYIbs6U2nP0cwKdC_xuR0&s=10',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=sleepwear-innerwear",
     }, 
     {
       id: 6,
       name: "ETHNIC WEAR",
       image: 'https://mokshaaworld.com/cdn/shop/files/BJK9436-2.jpg?v=1772998687&width=2981',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=ethnic-wear",
     },
     {
       id: 7,
       name: "ONESIES",
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHXB8-Klkbhu54bhH8C6l1p0VxvPc0oQNv0fQXyimXoOJFRhrDCdyfQSM&s=10',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=onesies",
     },
     {
       id: 8,
       name: "FLIP-FLOP & SANDLS",
       image: 'https://purpleunited.com/cdn/shop/files/TGSAFW000657-PINK-1.jpg?v=1775304545&width=450',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=flip-flop-sandls",
     },
     {
       id: 9,
       name: "DRESSES",
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfrBOYwZdbSN89gY9RMgVh_uwAKp-t6xQvICf0j1iet9Jum9Ukq20qf1Y0&s=10',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=dresses",
     },
     {
       id: 10,
       name: "T-SHIRT & TOPS",
       image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbfHUjhbfpO3BKtpG9KAgwr2zW0tDcGLdPTPLFmGrPqw&s=10',
-      href: '/products/kid',
+      href:  "/productss?category=kid&subcategory=t-shirt-tops",
     }
  
       
@@ -310,48 +310,48 @@ export default function Kid() {
     
     name: "Caps",
   image:'https://giftingshop.in/wp-content/uploads/Images/KidsTshirt/baby-tshirt-cotton-material.jpg',
-    href: '/products/kid'
+    href:  "/productss?category=kid&subcategory=caps",
   },
   {
     id: 2,
    
     name: "Ethnic Wear",
     image: 'https://essa.in/cdn/shop/files/b-3846_boys_down_shoulder_t_shirt_dusty_pink.jpg?v=1758349055',
-    href: '/products/kid'
+    href:  "/productss?category=kid&subcategory=ethnicwear",
   },
   {
     id: 3,
     name: "Winter Wear",
     image:'https://fastcolors.in/cdn/shop/files/FastColors-Full_Sleeve-printed-kids_t_shirt_-_FastColors-4952393.jpg?v=1729849905&width=975',
-    href: '/products/kid'
+    href:  "/productss?category=kid&subcategory=winterwear",
   },
   {
     id: 4,
-    name: "Western Wear",
+    name: "",
     image:'https://img01.ztat.net/article/spp-media-p1/4e73e81be19f4d9ab47e3a9e681ef70f/902d35e073bd447fbad77603d3169f98.jpg?imwidth=300',
     href: '/products/kid'
   },
     {
     id: 5,
-    name: "Western Wear",
+    name: "",
       image:'https://i.etsystatic.com/60086255/r/il/ef2830/6955541500/il_570xN.6955541500_t9t3.jpg',
     href: '/products/kid'
   },
     {
     id: 6,
-    name: "Western Wear",
+    name: "",
     image:'https://img.tatacliq.com/images/i30//437Wx649H/MP000000030368343_437Wx649H_202603071121131.jpeg',
     href: '/products/kid'
   },
    {
     id: 7,
-    name: "Western Wear",
+    name: "",
     image:'https://manyavar.scene7.com/is/image/manyavar/CHOSK719-311+(4)_07-05-2025-13-01:283x395?dpr=on,2.625',
     href: '/products/kid'
   },
    {
     id: 8,
-    name: "Western Wear",
+    name: "",
     image:'https://5.imimg.com/data5/GLADMIN/Default/2021/8/GF/BA/KC/76258/kids-formal-wear-250x250.jpg',
     href: '/products/kid'
   }

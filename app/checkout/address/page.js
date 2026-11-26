@@ -4,21 +4,34 @@ import { useRouter } from "next/navigation";
 
 export default function AddressPage() {
   const router = useRouter();
-  const [addresses, setAddresses] = useState([
-    {
-      id: 1,
-      name: "Ashwani Kumar",
-      phone: "7451832023",
-      address: "94, Laksher Dhandhera Raj vihar",
-      city: "Roorkee",
-      state: "Uttarakhand",
-      pincode: "247666",
-    }
-  ]);
-  
+  const [addresses, setAddresses] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(1);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   
+
+useEffect(() => {
+   async function fetchCartForAddress() {
+    try{
+        const userId = localStorage.getItem("userId") || "guest-user-1";
+
+      const res = await fetch(`/api/cart?userId=${userId}`);
+      const data = await res.json();
+
+      if(data.success && data.cart && data.cart.items){
+        setCartItems(data.cart.items);
+      }
+    }catch(error){
+      console.error("Error fetching cart for address page:", error);
+    }
+   }
+   fetchCartForAddress();
+  }, []);
+
+  // user email get karna (localStorage se session se, fallback email)
+  const userEmail = typeof window !== "undefined" ? localStorage.getItem("userEmail") || "ashwaniiikumar.com" : "";
+
   // New Address Form State
   const [formData, setFormData] = useState({
     name: "",
@@ -29,26 +42,57 @@ export default function AddressPage() {
     pincode: "",
   });
 
+  useEffect(() => {
+    async function fetchAddresses() {
+      if (!userEmail) return;
+      try {
+        const res = await fetch(`/api/auth/user/address?email=${userEmail}`);
+        const data = await res.json();
+
+        if (data.success && data.addresses) {
+          setAddresses(data.addresses);
+          if (data.addresses.length > 0) {
+            setSelectedAddressId(data.addresses[0].id);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching addresses", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAddresses();
+  }, [userEmail]);
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleAddAddress = (e) => {
+  const handleAddAddress = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.address || !formData.pincode) {
       alert("Please fill all required fields!");
       return;
     }
 
-    const newAddress = {
-      id: Date.now(),
-      ...formData
-    };
+    try {
+      const res = await fetch("/api/auth/user/address", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userEmail, address: formData })
+      });
 
-    setAddresses([...addresses, newAddress]);
-    setSelectedAddressId(newAddress.id);
-    setShowForm(false);
-    setFormData({ name: "", phone: "", address: "", city: "", state: "", pincode: "" });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("selectedAddress", JSON.stringify(formData));
+        alert("Address added successfully!");
+        window.location.reload();
+      } else {
+        alert("error: " + data.message);
+      }
+    } catch (error) {
+      console.error("Error saving address:", error);
+    }
   };
 
   const handleProceedToPayment = () => {
@@ -58,8 +102,22 @@ export default function AddressPage() {
       return;
     }
     localStorage.setItem("selectedAddress", JSON.stringify(chosenAddress));
-    router.push("/checkouts/payment");
+    router.push("/checkouts/payment"); // Route sahi kar diya gaya hai
   };
+
+  // Dynamic Calculations
+  const totalProductPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalOriginalPrice = cartItems.reduce((acc, item)=> {
+    const itemMrp = item.originalPrice || item.mrp || item.price || 0;
+    return acc + itemMrp * (item.quantity || 1);
+  }, 0)
+
+  const totalDiscount = totalOriginalPrice > totalProductPrice? totalOriginalPrice-totalProductPrice: 0;
+  const orderTotal = totalProductPrice;
+ 
+  if (loading) {
+    return <div className="min-h-screen bg-[#0b0b0b] text-white flex items-center justify-center">Loading Addresses...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white py-6 px-4 md:px-12">
@@ -170,33 +228,32 @@ export default function AddressPage() {
         </div>
 
         {/* Right Side: Price Details Box */}
-        <div className="bg-[#141414] border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
-          <h3 className="font-bold text-sm text-gray-200 border-b border-gray-800 pb-3">
-            Price Details (1 Item)
-          </h3>
+        {/* Right Side: Price Details Box */}
+<div className="bg-[#141414] border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+  <h3 className="font-bold text-sm text-gray-200 border-b border-gray-800 pb-3">
+    Price Details ({cartItems.length} Item{cartItems.length > 1 ? 's' : ''})
+  </h3>
 
-          <div className="space-y-2 text-xs text-gray-300">
-            <div className="flex justify-between">
-              <span className="underline decoration-dotted underline-offset-4 cursor-pointer">Product Price</span>
-              <span className="font-semibold">+ ₹269</span>
-            </div>
-            <div className="flex justify-between text-emerald-400">
-              <span className="underline decoration-dotted underline-offset-4 cursor-pointer">Total Discounts</span>
-              <span className="font-semibold">- ₹10</span>
-            </div>
-          </div>
+  <div className="space-y-2 text-xs text-gray-300">
+    <div className="flex justify-between">
+      <span>Product Price</span>
+      <span className="font-semibold">+ ₹{totalProductPrice}</span>
+    </div>
+    <div className="flex justify-between text-emerald-400">
+      <span>Total Discounts</span>
+      <span className="font-semibold">- ₹{totalDiscount}</span>
+    </div>
+  </div>
 
-          <div className="border-t border-gray-800 pt-3 flex justify-between items-center text-sm font-bold text-white">
-            <span>Order Total</span>
-            <span className="text-base text-white">₹259</span>
-          </div>
+  <div className="border-t border-gray-800 pt-3 flex justify-between items-center text-sm font-bold text-white">
+    <span>Order Total</span>
+    <span className="text-base text-white">₹{orderTotal}</span>
+  </div>
 
-          {/* Discount Banner */}
-          <div className="bg-emerald-950/40 border border-emerald-800/50 p-2.5 rounded-xl text-emerald-400 text-xs text-center font-medium">
-            🛡️ Yay! Your total discount is ₹10
-          </div>
-        </div>
-
+  <div className="bg-emerald-950/40 border border-emerald-800/50 p-2.5 rounded-xl text-emerald-400 text-xs text-center font-medium">
+    🛡️ Yay! Your total discount is ₹{totalDiscount}
+  </div>
+</div>
       </div>
     </div>
   );

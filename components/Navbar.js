@@ -2,22 +2,52 @@
 
 "use client";
 import Link from "next/link";
-import { Search, User, Heart, ShoppingBag, Menu, X, ChevronDown, ArrowLeft } from "lucide-react";
+import { Search, User, Heart,Shield, ShoppingBag, Menu, X, ChevronDown, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { productsData } from "@/app/data/products";
 
 export default function Navbar() {
   const router = useRouter();
-
+  const [allProducts, setAllProducts] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [userName, setUserName] = useState("");
+  const [cartCount, setCartCount] = useState(0);
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(()=>{
+    const role = localStorage.getItem("userRole");
+    if(role){
+      setUserRole(role);
+    }
+  },[]);
+
+    useEffect(() =>{
+      async function fetchCartCount() {
+        try{
+          const userId = localStorage.getItem("userId") || "guest-user-1";
+          const res = await fetch(`/api/cart?userId=${userId}`);
+          const data = await res.json();
+
+          if(data.success && data.cart){
+            //Total quantity calculate
+            const totalItems= data.cart.items?.reduce((sum, item)=> sum + item.quantity, 0) || 0;
+           setCartCount(totalItems);
+          }
+        }catch(error){
+          console.error("Error Fetching cart count:", error)
+        }
+      } 
+      fetchCartCount();
+
+      window.addEventListener("cartUpdated", fetchCartCount);
+      return () => window.removeEventListener("cartUpdated", fetchCartCount);
+    }, []);
   
   const filteredSuggestions = searchQuery.trim() === ""
       ? []
-      :productsData.filter((item)=>
+      :(allProducts || []).filter((item)=>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase)||
       item.subcategory.toLowerCase().includes(searchQuery.toLowerCase)
@@ -29,6 +59,9 @@ export default function Navbar() {
   // Mobile drawer and submenu states
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileCategory, setActiveMobileCategory] = useState(null);
+     
+
+
 
   useEffect(() => {
     // LocalStorage se exact values read karna
@@ -248,12 +281,17 @@ export default function Navbar() {
                     <div>
                       <h4 className="font-bold text-[#d4af37] mb-2 uppercase tracking-wider">Bottomwear</h4>
                       <ul className="space-y-1.5 text-gray-400">
+                        <li><Link href="/productss?category=men&subcategory=office-wear" className="hover:text-[#e0a96d] transition-colors"></Link></li>
+                        <li><Link href="/productss?category=men&subcategory=loungewear" className="hover:text-[#e0a96d] transition-colors"></Link></li>
                         <li><Link href="/productss?category=men&subcategory=jeans" className="hover:text-[#e0a96d] transition-colors">Jeans</Link></li>
                         <li><Link href="/productss?category=men&subcategory=casual-trousers" className="hover:text-[#e0a96d] transition-colors">Casual Trousers</Link></li>
+                        <li><Link href="/productss?category=men&subcategory=innerwear" className="hover:text-[#e0a96d] transition-colors">innerwear</Link></li>
                         <li><Link href="/productss?category=men&subcategory=track-pants" className="hover:text-[#e0a96d] transition-colors">Track Pants</Link></li>
                       </ul>
                     </div>
                   </div>
+
+                    
 
                   <div className="space-y-4">
                     <div>
@@ -261,6 +299,7 @@ export default function Navbar() {
                       <ul className="space-y-1.5 text-gray-400">
                         <li><Link href="/productss?category=men&subcategory=casual-shoes" className="hover:text-[#e0a96d] transition-colors">Casual Shoes</Link></li>
                         <li><Link href="/productss?category=men&subcategory=sports-shoes" className="hover:text-[#e0a96d] transition-colors">Sports Shoes</Link></li>
+                        <li><Link href="/productss?category=men&subcategory=biba" className="hover:text-[#e0a96d] transition-colors"></Link></li>
                         <li><Link href="/productss?category=men&subcategory=sneakers" className="hover:text-[#e0a96d] transition-colors">Sneakers</Link></li>
                       </ul>
                     </div>
@@ -268,10 +307,13 @@ export default function Navbar() {
 
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-bold text-[#d4af37] mb-2 uppercase tracking-wider">Active Wear</h4>
+                      <h4 className="font-bold text-[#d4af37] mb-2 uppercase tracking-wider">Sports & Active Wear</h4>
                       <ul className="space-y-1.5 text-gray-400">
+                        <li><Link href="/productss?category=women&subcategory=mens-activewear" className="hover:text-[#e0a96d] transition-colors"></Link></li>
                         <li><Link href="/productss?category=men&subcategory=active-t-shirts" className="hover:text-[#e0a96d] transition-colors">Active T-Shirts</Link></li>
                         <li><Link href="/productss?category=men&subcategory=tracksuits" className="hover:text-[#e0a96d] transition-colors">Tracksuits</Link></li>
+                        <li><Link href="/productss?category=men&subcategory=sports-track-pant-shorts" className="hover:text-[#e0a96d] transition-colors">Track pants & shorts</Link></li>
+
                       </ul>
                     </div>
                   </div>
@@ -305,10 +347,10 @@ export default function Navbar() {
         <div>
           <h4 className="font-bold text-[#d4af37] mb-2 uppercase tracking-wider">Indian & Ethnic</h4>
           <ul className="space-y-1.5 text-gray-400">
-            <li><Link href="/productss?category=women&subcategory=kurtas-suits" className="hover:text-[#e0a96d] transition-colors">Kurtas & Suits</Link></li>
+            <li><Link href="/productss?category=women&subcategory=kurtas-kurtis-suits" className="hover:text-[#e0a96d] transition-colors">Kurtas & Suits</Link></li>
             <li><Link href="/productss?category=women&subcategory=sarees-lehengas" className="hover:text-[#e0a96d] transition-colors">Sarees & Lehengas</Link></li>
             <li><Link href="/productss?category=women&subcategory=dupattas-shawls" className="hover:text-[#e0a96d] transition-colors">Dupattas & Shawls</Link></li>
-            <li><Link href="/productss?category=women&subcategory=ethnic-bottoms" className="hover:text-[#e0a96d] transition-colors">Ethnic Bottoms</Link></li>
+            <li><Link href="/productss?category=women&subcategory=ethnic-wear" className="hover:text-[#e0a96d] transition-colors">Ethnic wear</Link></li>
           </ul>
         </div>
       </div>
@@ -320,6 +362,7 @@ export default function Navbar() {
             <li><Link href="/productss?category=women&subcategory=dresses-jumpsuits" className="hover:text-[#e0a96d] transition-colors">Dresses & Jumpsuits</Link></li>
             <li><Link href="/productss?category=women&subcategory=tops-t-shirts" className="hover:text-[#e0a96d] transition-colors">Tops & T-Shirts</Link></li>
             <li><Link href="/productss?category=women&subcategory=jeans-trousers" className="hover:text-[#e0a96d] transition-colors">Jeans & Trousers</Link></li>
+            <li><Link href="/productss?category=women&subcategory=western-wear" className="hover:text-[#e0a96d] transition-colors"></Link></li>
             <li><Link href="/productss?category=women&subcategory=jackets-shrugs" className="hover:text-[#e0a96d] transition-colors">Jackets & Shrugs</Link></li>
           </ul>
         </div>
@@ -342,6 +385,7 @@ export default function Navbar() {
           <h4 className="font-bold text-[#d4af37] mb-2 uppercase tracking-wider">Active & Sleepwear</h4>
           <ul className="space-y-1.5 text-gray-400">
             <li><Link href="/productss?category=women&subcategory=sports-wear-leggings" className="hover:text-[#e0a96d] transition-colors">Sports Wear & Leggings</Link></li>
+            <li><Link href="/productss?category=women&subcategory=polo-wear" className="hover:text-[#e0a96d] transition-colors"></Link></li>
             <li><Link href="/productss?category=women&subcategory=nightwear-loungewear" className="hover:text-[#e0a96d] transition-colors">Nightwear & Loungewear</Link></li>
             <li><Link href="/productss?category=women&subcategory=innerwear-lingerie" className="hover:text-[#e0a96d] transition-colors">Innerwear & Lingerie</Link></li>
           </ul>
@@ -378,6 +422,7 @@ export default function Navbar() {
                       <ul className="space-y-1.5 text-gray-400">
                         <li><Link href="/productss?category=kid&subcategory=t-shirts-shirts" className="hover:text-[#e0a96d] transition-colors">T-Shirts & Shirts</Link></li>
                         <li><Link href="/productss?category=kid&subcategory=shorts-jeans " className="hover:text-[#e0a96d] transition-colors">Shorts & Jeans</Link></li>
+                          
                         <li><Link href="/productss?category=kid&subcategory=ethnic-wear-kurtas" className="hover:text-[#e0a96d] transition-colors">Ethnic Wear & Kurtas</Link></li>
                         <li><Link href="/productss?category=kid&subcategory=jackets-sweatshirts" className="hover:text-[#e0a96d] transition-colors">Jackets & Sweatshirts</Link></li>
                         <li><Link href="/productss?category=kid&subcategory=track-pants-pyjamas" className="hover:text-[#e0a96d] transition-colors">Track Pants & Pyjamas</Link></li>
@@ -560,8 +605,9 @@ export default function Navbar() {
                 <ul className="space-y-3 font-semibold text-gray-200">
                   <li><Link href="/my/orders" className="hover:text-[#d4af37] transition">Orders</Link></li>
                   <li><Link href="/wishlist" className="hover:text-[#d4af37] transition">Wishlist</Link></li>
-                  <li><Link href="/gift-cards" className="hover:text-[#d4af37] transition">Gift Cards</Link></li>
-                  <li><Link href="/contact" className="hover:text-[#d4af37] transition">Contact Us</Link></li>
+                  <li><Link href="/my/profile/edit" className="hover:text-[#d4af37] transition">Edit Profile</Link></li>
+                  <li><Link href="/my/address" className="hover:text-[#d4af37] transition">Save Address</Link></li>
+
                 </ul>
 
                 {isLoggedIn && (
@@ -581,6 +627,15 @@ export default function Navbar() {
             </div>
           </div>
 
+                {userRole ==="admin" && (
+                 <Link 
+            href="/admin" 
+            className="flex items-center gap-1 text-xs font-semibold px-3 py-2  md:border md:border-[#332b1e] rounded-lg md:hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-gray-300 md:bg-[#161514]"
+          >
+            <Shield size={13} className="text-[#e0a96d]" />
+            <span className="hidden sm:inline text-xs">Admine</span>
+          </Link>
+           )}
           {/* Wishlist */}
           <Link 
             href="/wishlist" 
@@ -600,13 +655,13 @@ export default function Navbar() {
 
             {/* Mobile View Floating Badge */}
             <span className="sm:hidden absolute -top-1 -right-1 bg-black text-[#d4af37] text-[7px] w-3 h-3 rounded-full flex items-center justify-center font-extrabold border border-[#d4af37]">
-              0
+              {cartCount}
             </span>
 
             {/* Desktop View Text & Badge */}
             <span className="hidden sm:inline text-xs">Cart</span>
             <span className="hidden sm:flex bg-black text-[#d4af37] text-[8px] w-3.5 h-3.5 rounded-full items-center justify-center font-bold">
-              0
+              {cartCount}
             </span>
           </Link>
         </div>
@@ -667,7 +722,7 @@ export default function Navbar() {
                       <p className="font-bold text-[#d4af37] mb-1.5 uppercase tracking-wider">Bottomwear</p>
                       <ul className="space-y-1.5 pl-2 text-gray-400">
                         <li><Link href="/productss?category=men&subcategory=jeans" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Jeans</Link></li>
-                        <li><Link href="/productss?category=men&subcategory=casual-trouser" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Casual Trousers</Link></li>
+                        <li><Link href="/productss?category=men&subcategory=casual-trousers" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Casual Trousers</Link></li>
                         <li><Link href="/productss?category=men&subcategory=track-pants" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#e0a96d]">Track Pants</Link></li>
                       </ul>
                     </div>

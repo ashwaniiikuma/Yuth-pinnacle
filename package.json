@@ -9,9 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "cloudinary": "^2.11.0",
+    "csv-parse": "^7.0.3",
     "lucide-react": "^1.31.0",
+    "mongeese": "^0.0.1",
     "mongodb": "^7.6.0",
     "next": "16.3.0",
+    "razorpay": "^2.9.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-icons": "^5.7.0"
